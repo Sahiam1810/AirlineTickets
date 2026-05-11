@@ -12,8 +12,6 @@ public sealed class User : BaseEntity<int>
     public int RoleId { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime? LastAccess { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
 
     // Navigation
     public Person? Person { get; set; }

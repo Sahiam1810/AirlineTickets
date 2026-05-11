@@ -141,3 +141,4 @@ C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\refint
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.pdb
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.genruntimeconfig.cache
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\ref\Api.dll
+C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.sourcelink.json
