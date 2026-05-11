@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Entities\Aircraft\" />
+    <Folder Include="Entities\Airlines\" />
+    <Folder Include="Entities\Auth\" />
+    <Folder Include="Entities\Flights\" />
+    <Folder Include="Entities\Geography\" />
+    <Folder Include="Entities\Location\" />
+    <Folder Include="Entities\Payments\" />
+    <Folder Include="Entities\People\" />
+    <Folder Include="Entities\Reservations\" />
+    <Folder Include="Entities\Routes\" />
+    <Folder Include="Entities\Staff\" />
+    <Folder Include="Entities\Tickets\" />
+  </ItemGroup>
+
+</Project>
