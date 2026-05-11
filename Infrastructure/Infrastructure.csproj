@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Configuration\Geography\" />
     <Folder Include="Context\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
