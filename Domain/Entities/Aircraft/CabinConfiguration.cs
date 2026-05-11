@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Aircraft;
 
-public sealed class CabinConfiguration
+public sealed class CabinConfiguration : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int AircraftUnitId { get; set; }
     public int CabinTypeId { get; set; }
     public int StartRow { get; set; }

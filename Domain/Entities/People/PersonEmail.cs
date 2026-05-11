@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.People;
 
-public sealed class PersonEmail
+public sealed class PersonEmail : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int PersonId { get; set; }
     public string EmailUser { get; set; } = string.Empty;
     public int EmailDomainId { get; set; }

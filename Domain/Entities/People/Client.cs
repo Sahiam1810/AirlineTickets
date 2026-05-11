@@ -1,12 +1,11 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.People;
 
-public sealed class Client
+public sealed class Client : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int PersonId { get; set; }
-    public DateTime CreatedAt { get; set; }
 
     // Navigation
     public Person Person { get; set; } = null!;

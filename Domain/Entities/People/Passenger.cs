@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.People;
 
-public sealed class Passenger
+public sealed class Passenger : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int PersonId { get; set; }
     public int PassengerTypeId { get; set; }
 

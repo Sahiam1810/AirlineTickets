@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Staff;
 
-public sealed class StaffRole
+public sealed class StaffRole : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
 
     // Navigation

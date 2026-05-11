@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Geography;
 
-public sealed class Region
+public sealed class Region : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public int CountryId { get; set; }

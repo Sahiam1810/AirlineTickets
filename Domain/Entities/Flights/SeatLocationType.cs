@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Flights;
 
-public sealed class SeatLocationType
+public sealed class SeatLocationType : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
 
     // Navigation

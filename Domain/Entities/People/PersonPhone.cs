@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.People;
 
-public sealed class PersonPhone
+public sealed class PersonPhone : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int PersonId { get; set; }
     public int PhoneCodeId { get; set; }
     public string PhoneNumber { get; set; } = string.Empty;

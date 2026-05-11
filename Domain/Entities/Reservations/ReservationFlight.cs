@@ -1,11 +1,11 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Flights;
 
 namespace Domain.Entities.Reservations;
 
-public sealed class ReservationFlight
+public sealed class ReservationFlight : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int ReservationId { get; set; }
     public int FlightId { get; set; }
     public decimal PartialValue { get; set; }

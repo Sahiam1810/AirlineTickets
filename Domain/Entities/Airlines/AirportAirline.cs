@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Airlines;
 
-public sealed class AirportAirline
+public sealed class AirportAirline : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int AirportId { get; set; }
     public int AirlineId { get; set; }
     public string? Terminal { get; set; }

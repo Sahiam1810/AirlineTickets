@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Aircraft;
 
-public sealed class AircraftModel
+public sealed class AircraftModel : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int ManufacturerId { get; set; }
     public string ModelName { get; set; } = string.Empty;
     public int MaxCapacity { get; set; }

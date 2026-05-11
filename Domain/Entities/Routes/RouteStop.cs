@@ -1,11 +1,11 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Airlines;
 
 namespace Domain.Entities.Routes;
 
-public sealed class RouteStop
+public sealed class RouteStop : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int RouteId { get; set; }
     public int StopAirportId { get; set; }
     public int Order { get; set; }

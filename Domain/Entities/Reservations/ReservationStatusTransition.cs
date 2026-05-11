@@ -1,9 +1,9 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Reservations;
-public sealed class ReservationStatusTransition
+public sealed class ReservationStatusTransition : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int OriginStatusId { get; set; }
     public int DestinationStatusId { get; set; }
 

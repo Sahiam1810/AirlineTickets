@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Flights;
 
-public sealed class FlightStatusTransition
+public sealed class FlightStatusTransition : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int OriginStateId { get; set; }
     public int DestinationStateId { get; set; }
 

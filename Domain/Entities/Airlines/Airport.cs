@@ -1,10 +1,10 @@
+using Domain.Common;
 using Domain.Entities.Geography;
 
 namespace Domain.Entities.Airlines;
 
-public sealed class Airport
+public sealed class Airport : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string IataCode { get; set; } = string.Empty;
     public string? IcaoCode { get; set; }

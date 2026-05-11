@@ -1,11 +1,11 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Staff;
 
 namespace Domain.Entities.Flights;
 
-public sealed class FlightAssignment
+public sealed class FlightAssignment : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int FlightId { get; set; }
     public int StaffMemberId { get; set; }
     public int FlightRoleId { get; set; }

@@ -1,11 +1,11 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Airlines;
 
 namespace Domain.Entities.Aircraft;
 
-public sealed class AircraftUnit
+public sealed class AircraftUnit : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int ModelId { get; set; }
     public int AirlineId { get; set; }
     public string Registration { get; set; } = string.Empty;

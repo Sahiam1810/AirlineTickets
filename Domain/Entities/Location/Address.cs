@@ -1,11 +1,11 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Geography;
 
 namespace Domain.Entities.Location;
 
-public sealed class Address
+public sealed class Address : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int RoadTypeId { get; set; }
     public string RoadName { get; set; } = string.Empty;
     public string? Number { get; set; }

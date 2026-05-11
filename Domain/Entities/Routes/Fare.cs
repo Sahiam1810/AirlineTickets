@@ -1,12 +1,12 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Aircraft;
 using Domain.Entities.People;
 
 namespace Domain.Entities.Routes;
 
-public sealed class Fare
+public sealed class Fare : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int RouteId { get; set; }
     public int CabinTypeId { get; set; }
     public int PassengerTypeId { get; set; }

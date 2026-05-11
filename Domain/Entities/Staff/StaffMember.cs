@@ -1,20 +1,18 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Airlines;
 using Domain.Entities.People;
 
 namespace Domain.Entities.Staff;
 
-public sealed class StaffMember
+public sealed class StaffMember : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int PersonId { get; set; }
     public int RoleId { get; set; }
     public int? AirlineId { get; set; }
     public int? AirportId { get; set; }
     public DateOnly HireDate { get; set; }
     public bool IsActive { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
 
     // Navigation
     public Person Person { get; set; } = null!;

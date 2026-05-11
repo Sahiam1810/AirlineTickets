@@ -1,10 +1,10 @@
 using System;
+using Domain.Common;
 
 namespace Domain.Entities.Staff;
 
-public sealed class StaffAvailability
+public sealed class StaffAvailability : BaseEntity<int>
 {
-    public int Id { get; set; }
     public int StaffMemberId { get; set; }
     public int AvailabilityStatusId { get; set; }
     public DateTime StartDate { get; set; }

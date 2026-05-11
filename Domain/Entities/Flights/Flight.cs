@@ -1,13 +1,13 @@
 using System;
+using Domain.Common;
 using Domain.Entities.Aircraft;
 using Domain.Entities.Airlines;
 using Domain.Entities.Routes;
 
 namespace Domain.Entities.Flights;
 
-public sealed class Flight
+public sealed class Flight : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string FlightCode { get; set; } = string.Empty;
     public int AirlineId { get; set; }
     public int RouteId { get; set; }
@@ -18,8 +18,6 @@ public sealed class Flight
     public int AvailableSeats { get; set; }
     public int FlightStateId { get; set; }
     public DateTime? RescheduledAt { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
 
     // Navigation
     public Airline Airline { get; set; } = null!;
