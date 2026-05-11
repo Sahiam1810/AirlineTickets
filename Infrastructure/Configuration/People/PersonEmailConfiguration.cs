@@ -1,0 +1,26 @@
+using System;
+using Domain.Entities.People;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Infrastructure.Configuration.People;
+
+public sealed class PersonEmailConfiguration : IEntityTypeConfiguration<PersonEmail>
+{
+    public void Configure(EntityTypeBuilder<PersonEmail> builder)
+    {
+        builder.ToTable("personemails");
+        builder.HasKey(pe => pe.Id);
+        builder.Property(pe => pe.Id).HasColumnName("id");
+        builder.Property(pe => pe.PersonId).HasColumnName("person_id");
+        builder.Property(pe => pe.EmailUser).HasColumnName("email_user").HasMaxLength(100).IsRequired();
+        builder.Property(pe => pe.EmailDomainId).HasColumnName("email_domain_id");
+        builder.Property(pe => pe.IsPrimary).HasColumnName("is_primary");
+        builder.HasOne(pe => pe.Person)
+            .WithMany(p => p.Emails)
+            .HasForeignKey(pe => pe.PersonId);
+        builder.HasOne(pe => pe.EmailDomain)
+            .WithMany(e => e.PersonEmails)
+            .HasForeignKey(pe => pe.EmailDomainId);
+    }
+}
