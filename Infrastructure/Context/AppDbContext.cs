@@ -50,7 +50,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<StaffAvailability> StaffAvailabilities => Set<StaffAvailability>();
 
     // Aircraft
-    public DbSet<AircraftManufacturer> AircraftManufacturers { get; set; } = default!;
+    public DbSet<AircraftManufacturer> AircraftManufacturers => Set<AircraftManufacturer>();
     public DbSet<AircraftModel> AircraftModels { get; set; } = default!;
     public DbSet<AircraftUnit> AircraftUnits { get; set; } = default!;
     public DbSet<CabinType> CabinTypes { get; set; } = default!;

@@ -20,6 +20,7 @@ public interface IUnitOfWork
     IAirlineRepository Airlines { get; }
     IAirportRepository Airports { get; }
     IAirportAirlineRepository AirportAirlines { get; }
+    IAircraftManufacturerRepository AircraftManufacturers { get; }
     IStaffRoleRepository StaffRoles { get; }
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }
