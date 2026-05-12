@@ -17,15 +17,13 @@ public sealed class CountryConfiguration : IEntityTypeConfiguration<Country>
             .HasMaxLength(100)
             .IsRequired()
             .HasConversion(v => v.Value, v => CountryName.Create(v));
-        builder.Property(c => c.IsoCode)
-            .HasColumnName("iso_code")
-            .HasMaxLength(3)
-            .IsRequired()
-            .HasConversion(v => v.Value, v => IsoCode.Create(v));
-        builder.Property(c => c.ContinentId).HasColumnName("continent_id");
-        builder.HasIndex(c => c.IsoCode).IsUnique();
+        builder.Property(c => c.ContinentId)
+            .HasColumnName("continent_id")
+            .IsRequired();
+        builder.HasIndex(c => c.Name).IsUnique();
         builder.HasOne(c => c.Continent)
             .WithMany(ct => ct.Countries)
-            .HasForeignKey(c => c.ContinentId);
+            .HasForeignKey(c => c.ContinentId)
+            .IsRequired();
     }
 }

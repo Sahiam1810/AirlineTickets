@@ -1,6 +1,7 @@
 using Application.Abstractions;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Continents;
+using Infrastructure.Repositories.Countries;
 
 namespace Infrastructure.UnitOfWork;
 
@@ -8,6 +9,7 @@ public class EfUnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _contextdb;
     public IContinent? _continent;
+    public ICountryRepository? _country;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -43,6 +45,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _continent;
+        }
+    }
+
+    public ICountryRepository Countries
+    {
+        get
+        {
+            if (_country == null)
+            {
+                _country = new CountryRepository(_contextdb);
+            }
+
+            return _country;
         }
     }
 }

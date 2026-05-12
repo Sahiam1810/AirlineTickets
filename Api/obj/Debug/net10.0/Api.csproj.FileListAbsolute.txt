@@ -126,6 +126,7 @@ C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.As
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.csproj.CoreCompileInputs.cache
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.sourcelink.json
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -141,4 +142,3 @@ C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\refint
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.pdb
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.genruntimeconfig.cache
 C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\ref\Api.dll
-C:\Users\LENOVO\Documents\Campus\net\AirlineTickets\Api\obj\Debug\net10.0\Api.sourcelink.json
