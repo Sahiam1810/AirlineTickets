@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Airlines;
+using Domain.ValueObjects.Airports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,14 +13,32 @@ public sealed class AirportConfiguration : IEntityTypeConfiguration<Airport>
         builder.ToTable("airports");
         builder.HasKey(a => a.Id);
         builder.Property(a => a.Id).HasColumnName("id");
-        builder.Property(a => a.Name).HasColumnName("name").HasMaxLength(150).IsRequired();
-        builder.Property(a => a.IataCode).HasColumnName("iata_code").HasMaxLength(3).IsRequired();
-        builder.Property(a => a.IcaoCode).HasColumnName("icao_code").HasMaxLength(4);
-        builder.Property(a => a.CityId).HasColumnName("city_id");
+        builder.Property(a => a.Name)
+            .HasColumnName("name")
+            .HasMaxLength(150)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => AirportName.Create(v));
+        builder.Property(a => a.IataCode)
+            .HasColumnName("iata_code")
+            .HasMaxLength(3)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => IataCode.Create(v));
+        builder.Property(a => a.IcaoCode)
+            .HasColumnName("icao_code")
+            .HasMaxLength(4)
+            .HasConversion(
+                v => v == null ? null : v.Value,
+                v => IcaoCode.Create(v));
+        builder.Property(a => a.CityId).HasColumnName("city_id").IsRequired();
         builder.HasIndex(a => a.IataCode).IsUnique();
         builder.HasIndex(a => a.IcaoCode).IsUnique();
         builder.HasOne(a => a.City)
             .WithMany()
-            .HasForeignKey(a => a.CityId);
+            .HasForeignKey(a => a.CityId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -2,6 +2,7 @@ using Application.Abstractions;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Airlines;
+using Infrastructure.Repositories.Airports;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Clients;
 using Infrastructure.Repositories.Continents;
@@ -34,6 +35,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IPersonPhoneRepository? _personPhone;
     public IClientRepository? _client;
     public IAirlineRepository? _airline;
+    public IAirportRepository? _airport;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -238,6 +240,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _airline;
+        }
+    }
+
+    public IAirportRepository Airports
+    {
+        get
+        {
+            if (_airport == null)
+            {
+                _airport = new AirportRepository(_contextdb);
+            }
+
+            return _airport;
         }
     }
 }
