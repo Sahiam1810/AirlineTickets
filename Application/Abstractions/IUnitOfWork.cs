@@ -29,6 +29,7 @@ public interface IUnitOfWork
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }
     IStaffRepository Staff { get; }
+    IRouteRepository Routes { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

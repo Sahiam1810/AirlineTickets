@@ -22,6 +22,7 @@ using Infrastructure.Repositories.PersonPhones;
 using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
+using Infrastructure.Repositories.Routes;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
@@ -56,6 +57,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffAvailabilityRepository? _staffAvailability;
     public IStaffRepository? _staff;
+    public IRouteRepository? _route;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -403,6 +405,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _staff;
+        }
+    }
+
+    public IRouteRepository Routes
+    {
+        get
+        {
+            if (_route == null)
+            {
+                _route = new RouteRepository(_contextdb);
+            }
+
+            return _route;
         }
     }
 }
