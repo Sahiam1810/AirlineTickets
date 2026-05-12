@@ -47,7 +47,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<StaffMember> Staff => Set<StaffMember>();
     public DbSet<StaffMember> StaffMembers => Set<StaffMember>();
     public DbSet<AvailabilityStatus> AvailabilityStatuses => Set<AvailabilityStatus>();
-    public DbSet<StaffAvailability> StaffAvailabilities { get; set; } = default!;
+    public DbSet<StaffAvailability> StaffAvailabilities => Set<StaffAvailability>();
 
     // Aircraft
     public DbSet<AircraftManufacturer> AircraftManufacturers { get; set; } = default!;

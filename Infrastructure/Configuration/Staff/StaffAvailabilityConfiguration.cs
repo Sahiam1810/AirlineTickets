@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Staff;
+using Domain.ValueObjects.Staff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,19 +10,27 @@ public sealed class StaffAvailabilityConfiguration : IEntityTypeConfiguration<St
 {
     public void Configure(EntityTypeBuilder<StaffAvailability> builder)
     {
-        builder.ToTable("staffavailability");
+        builder.ToTable("staffavailabilities");
         builder.HasKey(sa => sa.Id);
         builder.Property(sa => sa.Id).HasColumnName("id");
-        builder.Property(sa => sa.StaffMemberId).HasColumnName("staff_member_id");
-        builder.Property(sa => sa.AvailabilityStatusId).HasColumnName("availability_status_id");
-        builder.Property(sa => sa.StartDate).HasColumnName("start_date");
-        builder.Property(sa => sa.EndDate).HasColumnName("end_date");
-        builder.Property(sa => sa.Observation).HasColumnName("observation").HasMaxLength(255);
-        builder.HasOne(sa => sa.StaffMember)
+        builder.Property(sa => sa.StaffId).HasColumnName("staff_id").IsRequired();
+        builder.Property(sa => sa.AvailabilityStatusId).HasColumnName("availability_status_id").IsRequired();
+        builder.Property(sa => sa.StartDate).HasColumnName("start_date").IsRequired();
+        builder.Property(sa => sa.EndDate).HasColumnName("end_date").IsRequired();
+        builder.Property(sa => sa.Notes)
+            .HasColumnName("notes")
+            .HasMaxLength(255)
+            .HasConversion(
+                v => v == null ? null : v.Value,
+                v => StaffAvailabilityNotes.Create(v))
+            .IsRequired(false);
+        builder.HasOne(sa => sa.Staff)
             .WithMany(s => s.Availabilities)
-            .HasForeignKey(sa => sa.StaffMemberId);
+            .HasForeignKey(sa => sa.StaffId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(sa => sa.AvailabilityStatus)
             .WithMany(a => a.StaffAvailabilities)
-            .HasForeignKey(sa => sa.AvailabilityStatusId);
+            .HasForeignKey(sa => sa.AvailabilityStatusId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

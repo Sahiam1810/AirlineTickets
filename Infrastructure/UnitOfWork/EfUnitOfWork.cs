@@ -18,6 +18,7 @@ using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
 using Infrastructure.Repositories.Staff;
+using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
 
 namespace Infrastructure.UnitOfWork;
@@ -43,6 +44,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAirportAirlineRepository? _airportAirline;
     public IStaffRoleRepository? _staffRole;
     public IAvailabilityStatusRepository? _availabilityStatus;
+    public IStaffAvailabilityRepository? _staffAvailability;
     public IStaffRepository? _staff;
 
     public EfUnitOfWork(AppDbContext db)
@@ -300,6 +302,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _availabilityStatus;
+        }
+    }
+
+    public IStaffAvailabilityRepository StaffAvailabilities
+    {
+        get
+        {
+            if (_staffAvailability == null)
+            {
+                _staffAvailability = new StaffAvailabilityRepository(_contextdb);
+            }
+
+            return _staffAvailability;
         }
     }
 
