@@ -17,6 +17,7 @@ public interface IUnitOfWork
     IPersonEmailRepository PersonEmails { get; }
     IPersonPhoneRepository PersonPhones { get; }
     IClientRepository Clients { get; }
+    IAirlineRepository Airlines { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

@@ -38,7 +38,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Passenger> Passengers { get; set; } = default!;
 
     // Airlines
-    public DbSet<Airline> Airlines { get; set; } = default!;
+    public DbSet<Airline> Airlines => Set<Airline>();
     public DbSet<Airport> Airports { get; set; } = default!;
     public DbSet<AirportAirline> AirportAirlines { get; set; } = default!;
 
