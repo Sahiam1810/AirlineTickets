@@ -21,6 +21,7 @@ public interface IUnitOfWork
     IAirportRepository Airports { get; }
     IAirportAirlineRepository AirportAirlines { get; }
     IAircraftManufacturerRepository AircraftManufacturers { get; }
+    IAircraftModelRepository AircraftModels { get; }
     IStaffRoleRepository StaffRoles { get; }
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }

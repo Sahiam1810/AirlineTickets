@@ -51,7 +51,7 @@ public sealed class AppDbContext : DbContext
 
     // Aircraft
     public DbSet<AircraftManufacturer> AircraftManufacturers => Set<AircraftManufacturer>();
-    public DbSet<AircraftModel> AircraftModels { get; set; } = default!;
+    public DbSet<AircraftModel> AircraftModels => Set<AircraftModel>();
     public DbSet<AircraftUnit> AircraftUnits { get; set; } = default!;
     public DbSet<CabinType> CabinTypes { get; set; } = default!;
     public DbSet<CabinConfiguration> CabinConfigurations { get; set; } = default!;
