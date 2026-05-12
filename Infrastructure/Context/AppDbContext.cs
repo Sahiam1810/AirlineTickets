@@ -20,7 +20,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Continent> Continents { get; set; } = default!;
     public DbSet<Country> Countries { get; set; } = default!;
     public DbSet<Region> Regions => Set<Region>();
-    public DbSet<City> Cities { get; set; } = default!;
+    public DbSet<City> Cities => Set<City>();
 
     // Location
     public DbSet<RoadType> RoadTypes { get; set; } = default!;

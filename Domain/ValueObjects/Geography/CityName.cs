@@ -3,15 +3,28 @@ namespace Domain.ValueObjects.Geography;
 public sealed record CityName
 {
     public string Value { get; }
-    private CityName(string value) => Value = value;
+
+    private CityName(string value)
+    {
+        Value = value;
+    }
 
     public static CityName Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("City name is required", nameof(value));
+            throw new ArgumentException("El nombre de la ciudad es obligatorio", nameof(value));
+
         var normalized = value.Trim();
+
+        if (normalized.Length < 2)
+            throw new ArgumentException("El nombre debe tener al menos 2 caracteres", nameof(value));
+
         if (normalized.Length > 100)
-            throw new ArgumentException("City name cannot exceed 100 characters", nameof(value));
+            throw new ArgumentException("El nombre no puede superar los 100 caracteres", nameof(value));
+
+        if (!normalized.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            throw new ArgumentException("El nombre solo puede contener letras y espacios", nameof(value));
+
         return new CityName(normalized);
     }
 

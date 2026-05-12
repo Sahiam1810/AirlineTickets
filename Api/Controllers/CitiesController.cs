@@ -1,0 +1,134 @@
+using Api.Dtos.Cities;
+using Application.Abstractions;
+using Application.UseCase.Cities;
+using MapsterMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Controllers;
+
+public sealed class CitiesController : BaseApiController
+{
+    private readonly IUnitOfWork _uow;
+    private readonly ISender _sender;
+    private readonly IMapper _mapper;
+
+    public CitiesController(IUnitOfWork uow, ISender sender, IMapper mapper)
+    {
+        _uow = uow;
+        _sender = sender;
+        _mapper = mapper;
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IReadOnlyList<CityDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<CityDto>>> GetAll(CancellationToken ct)
+    {
+        var cities = await _uow.Cities.GetAllAsync(ct);
+        var result = _mapper.Map<IReadOnlyList<CityDto>>(cities);
+        return Ok(result);
+    }
+
+    [HttpGet("paged")]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? search = null,
+        CancellationToken ct = default)
+    {
+        if (page < 1)
+        {
+            page = 1;
+        }
+
+        if (pageSize < 1)
+        {
+            pageSize = 10;
+        }
+
+        var cities = await _uow.Cities.GetPagedAsync(page, pageSize, search, ct);
+        var total = await _uow.Cities.CountAsync(search, ct);
+        var items = _mapper.Map<IReadOnlyList<CityDto>>(cities);
+
+        return Ok(new
+        {
+            page,
+            pageSize,
+            total,
+            items
+        });
+    }
+
+    [HttpGet("count")]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Count([FromQuery] string? search = null, CancellationToken ct = default)
+    {
+        var total = await _uow.Cities.CountAsync(search, ct);
+        return Ok(new { total });
+    }
+
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(CityDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<CityDto>> GetById(int id, CancellationToken ct)
+    {
+        var city = await _uow.Cities.GetByIdAsync(id, ct);
+        if (city is null)
+        {
+            return NotFound();
+        }
+
+        var result = _mapper.Map<CityDto>(city);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(CityDto), StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create([FromBody] CreateCityRequest request, CancellationToken ct)
+    {
+        var command = _mapper.Map<CreateCity>(request);
+        var id = await _sender.Send(command, ct);
+        var city = await _uow.Cities.GetByIdAsync(id, ct);
+        if (city is null)
+        {
+            return NotFound();
+        }
+
+        var result = _mapper.Map<CityDto>(city);
+        return CreatedAtAction(nameof(GetById), new { id }, result);
+    }
+
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCityRequest request, CancellationToken ct)
+    {
+        var existing = await _uow.Cities.GetByIdAsync(id, ct);
+        if (existing is null)
+        {
+            return NotFound();
+        }
+
+        var command = _mapper.Map<UpdateCity>(request) with { Id = id };
+        await _sender.Send(command, ct);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(int id, CancellationToken ct)
+    {
+        var city = await _uow.Cities.GetByIdAsync(id, ct);
+        if (city is null)
+        {
+            return NotFound();
+        }
+
+        await _sender.Send(new DeleteCity(id), ct);
+
+        return NoContent();
+    }
+}

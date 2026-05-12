@@ -8,7 +8,6 @@ public sealed class City : BaseEntity<int>
     public CityName Name { get; private set; } = null!;
     public int RegionId { get; private set; }
 
-    // Navigation
     public Region Region { get; set; } = null!;
 
     private City() { }
@@ -19,9 +18,10 @@ public sealed class City : BaseEntity<int>
         RegionId = regionId;
     }
 
-    public void Update(string name)
+    public void Update(string name, int regionId)
     {
         Name = CityName.Create(name);
+        RegionId = regionId;
         UpdatedAt = DateTime.UtcNow;
     }
 }

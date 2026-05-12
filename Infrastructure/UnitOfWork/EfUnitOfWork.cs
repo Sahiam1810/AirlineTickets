@@ -1,5 +1,6 @@
 using Application.Abstractions;
 using Infrastructure.Context;
+using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.Regions;
@@ -12,6 +13,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IContinent? _continent;
     public ICountryRepository? _country;
     public IRegionRepository? _region;
+    public ICityRepository? _city;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -73,6 +75,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _region;
+        }
+    }
+
+    public ICityRepository Cities
+    {
+        get
+        {
+            if (_city == null)
+            {
+                _city = new CityRepository(_contextdb);
+            }
+
+            return _city;
         }
     }
 }

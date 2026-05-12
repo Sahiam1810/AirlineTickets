@@ -17,9 +17,13 @@ public sealed class CityConfiguration : IEntityTypeConfiguration<City>
             .HasMaxLength(100)
             .IsRequired()
             .HasConversion(v => v.Value, v => CityName.Create(v));
-        builder.Property(c => c.RegionId).HasColumnName("region_id");
+        builder.Property(c => c.RegionId)
+            .HasColumnName("region_id")
+            .IsRequired();
+        builder.HasIndex(c => new { c.Name, c.RegionId }).IsUnique();
         builder.HasOne(c => c.Region)
-            .WithMany(r => r.Cities)
-            .HasForeignKey(c => c.RegionId);
+            .WithMany()
+            .HasForeignKey(c => c.RegionId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
