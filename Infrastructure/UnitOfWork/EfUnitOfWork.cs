@@ -17,6 +17,7 @@ using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
 using Infrastructure.Repositories.Fares;
+using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.PersonEmails;
@@ -66,6 +67,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IRouteStopRepository? _routeStop;
     public ISeasonRepository? _season;
     public IFareRepository? _fare;
+    public IFlightStateRepository? _flightState;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -478,6 +480,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _fare;
+        }
+    }
+
+    public IFlightStateRepository FlightStates
+    {
+        get
+        {
+            if (_flightState == null)
+            {
+                _flightState = new FlightStateRepository(_contextdb);
+            }
+
+            return _flightState;
         }
     }
 }
