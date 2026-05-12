@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.People;
+using Domain.ValueObjects.EmailDomains;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +12,13 @@ public sealed class EmailDomainConfiguration : IEntityTypeConfiguration<EmailDom
         builder.ToTable("emaildomains");
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).HasColumnName("id");
-        builder.Property(e => e.Domain).HasColumnName("domain").HasMaxLength(100).IsRequired();
+        builder.Property(e => e.Domain)
+            .HasColumnName("domain")
+            .HasMaxLength(100)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => EmailDomainValue.Create(v));
         builder.HasIndex(e => e.Domain).IsUnique();
     }
 }
