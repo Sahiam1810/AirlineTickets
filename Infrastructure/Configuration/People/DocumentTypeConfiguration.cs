@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.People;
+using Domain.ValueObjects.People;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,8 +12,16 @@ public sealed class DocumentTypeConfiguration : IEntityTypeConfiguration<Documen
         builder.ToTable("documenttypes");
         builder.HasKey(d => d.Id);
         builder.Property(d => d.Id).HasColumnName("id");
-        builder.Property(d => d.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
-        builder.Property(d => d.Code).HasColumnName("code").HasMaxLength(10).IsRequired();
+        builder.Property(d => d.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired()
+            .HasConversion(v => v.Value, v => DocumentTypeName.Create(v));
+        builder.Property(d => d.Code)
+            .HasColumnName("code")
+            .HasMaxLength(10)
+            .IsRequired()
+            .HasConversion(v => v.Value, v => DocumentTypeCode.Create(v));
         builder.HasIndex(d => d.Code).IsUnique();
     }
 }

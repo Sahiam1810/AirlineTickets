@@ -4,6 +4,7 @@ using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
+using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
 
@@ -18,6 +19,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ICityRepository? _city;
     public IRoadTypeRepository? _roadType;
     public IAddressRepository? _address;
+    public IDocumentTypeRepository? _documentType;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -118,6 +120,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _address;
+        }
+    }
+
+    public IDocumentTypeRepository DocumentTypes
+    {
+        get
+        {
+            if (_documentType == null)
+            {
+                _documentType = new DocumentTypeRepository(_contextdb);
+            }
+
+            return _documentType;
         }
     }
 }

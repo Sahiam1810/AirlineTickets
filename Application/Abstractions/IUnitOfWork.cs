@@ -10,6 +10,7 @@ public interface IUnitOfWork
     ICityRepository Cities { get; }
     IRoadTypeRepository RoadTypes { get; }
     IAddressRepository Addresses { get; }
+    IDocumentTypeRepository DocumentTypes { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

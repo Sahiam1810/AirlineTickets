@@ -27,7 +27,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Address> Addresses => Set<Address>();
 
     // People
-    public DbSet<DocumentType> DocumentTypes { get; set; } = default!;
+    public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
     public DbSet<Person> People { get; set; } = default!;
     public DbSet<EmailDomain> EmailDomains { get; set; } = default!;
     public DbSet<PhoneCode> PhoneCodes { get; set; } = default!;
