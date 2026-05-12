@@ -31,6 +31,7 @@ public interface IUnitOfWork
     IStaffRepository Staff { get; }
     IRouteRepository Routes { get; }
     IRouteStopRepository RouteStops { get; }
+    ISeasonRepository Seasons { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

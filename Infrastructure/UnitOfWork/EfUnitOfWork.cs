@@ -24,6 +24,7 @@ using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
 using Infrastructure.Repositories.Routes;
 using Infrastructure.Repositories.RouteStops;
+using Infrastructure.Repositories.Seasons;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
@@ -60,6 +61,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IStaffRepository? _staff;
     public IRouteRepository? _route;
     public IRouteStopRepository? _routeStop;
+    public ISeasonRepository? _season;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -433,6 +435,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _routeStop;
+        }
+    }
+
+    public ISeasonRepository Seasons
+    {
+        get
+        {
+            if (_season == null)
+            {
+                _season = new SeasonRepository(_contextdb);
+            }
+
+            return _season;
         }
     }
 }
