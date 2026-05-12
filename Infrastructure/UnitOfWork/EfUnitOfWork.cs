@@ -2,6 +2,7 @@ using Application.Abstractions;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Cities;
+using Infrastructure.Repositories.Clients;
 using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
@@ -30,6 +31,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IPhoneCodeRepository? _phoneCode;
     public IPersonEmailRepository? _personEmail;
     public IPersonPhoneRepository? _personPhone;
+    public IClientRepository? _client;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -208,6 +210,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _personPhone;
+        }
+    }
+
+    public IClientRepository Clients
+    {
+        get
+        {
+            if (_client == null)
+            {
+                _client = new ClientRepository(_contextdb);
+            }
+
+            return _client;
         }
     }
 }
