@@ -43,7 +43,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<AirportAirline> AirportAirlines => Set<AirportAirline>();
 
     // Staff
-    public DbSet<StaffRole> StaffRoles { get; set; } = default!;
+    public DbSet<StaffRole> StaffRoles => Set<StaffRole>();
     public DbSet<StaffMember> StaffMembers { get; set; } = default!;
     public DbSet<AvailabilityStatus> AvailabilityStatuses { get; set; } = default!;
     public DbSet<StaffAvailability> StaffAvailabilities { get; set; } = default!;

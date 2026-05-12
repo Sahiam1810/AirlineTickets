@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Staff;
+using Domain.ValueObjects.Staff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +13,13 @@ public sealed class StaffRoleConfiguration : IEntityTypeConfiguration<StaffRole>
         builder.ToTable("staffroles");
         builder.HasKey(sr => sr.Id);
         builder.Property(sr => sr.Id).HasColumnName("id");
-        builder.Property(sr => sr.Name).HasColumnName("name").HasMaxLength(100).IsRequired();
+        builder.Property(sr => sr.Name)
+            .HasColumnName("name")
+            .HasMaxLength(100)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => StaffRoleName.Create(v));
         builder.HasIndex(sr => sr.Name).IsUnique();
     }
 }
