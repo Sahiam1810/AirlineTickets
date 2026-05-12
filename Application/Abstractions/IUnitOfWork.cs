@@ -21,6 +21,7 @@ public interface IUnitOfWork
     IAirportRepository Airports { get; }
     IAirportAirlineRepository AirportAirlines { get; }
     IStaffRoleRepository StaffRoles { get; }
+    IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffRepository Staff { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);

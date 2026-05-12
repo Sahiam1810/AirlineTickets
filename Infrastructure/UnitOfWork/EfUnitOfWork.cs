@@ -4,6 +4,7 @@ using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Airlines;
 using Infrastructure.Repositories.AirportAirlines;
 using Infrastructure.Repositories.Airports;
+using Infrastructure.Repositories.AvailabilityStatuses;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Clients;
 using Infrastructure.Repositories.Continents;
@@ -41,6 +42,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAirportRepository? _airport;
     public IAirportAirlineRepository? _airportAirline;
     public IStaffRoleRepository? _staffRole;
+    public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffRepository? _staff;
 
     public EfUnitOfWork(AppDbContext db)
@@ -285,6 +287,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _staffRole;
+        }
+    }
+
+    public IAvailabilityStatusRepository AvailabilityStatuses
+    {
+        get
+        {
+            if (_availabilityStatus == null)
+            {
+                _availabilityStatus = new AvailabilityStatusRepository(_contextdb);
+            }
+
+            return _availabilityStatus;
         }
     }
 
