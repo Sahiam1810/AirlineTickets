@@ -27,13 +27,16 @@
     <Folder Include="Configuration\" />
     <Folder Include="Configuration\Aircraft\" />
     <Folder Include="Configuration\Airlines\" />
+    <Folder Include="Configuration\Auth\" />
     <Folder Include="Configuration\Flights\" />
     <Folder Include="Configuration\Geography\" />
     <Folder Include="Configuration\Location\" />
+    <Folder Include="Configuration\Payments\" />
     <Folder Include="Configuration\People\" />
     <Folder Include="Configuration\Reservations\" />
     <Folder Include="Configuration\Routes\" />
     <Folder Include="Configuration\Staff\" />
+    <Folder Include="Configuration\Tickets\" />
     <Folder Include="Context\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
