@@ -23,6 +23,7 @@ using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
 using Infrastructure.Repositories.Routes;
+using Infrastructure.Repositories.RouteStops;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
@@ -58,6 +59,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IStaffAvailabilityRepository? _staffAvailability;
     public IStaffRepository? _staff;
     public IRouteRepository? _route;
+    public IRouteStopRepository? _routeStop;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -418,6 +420,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _route;
+        }
+    }
+
+    public IRouteStopRepository RouteStops
+    {
+        get
+        {
+            if (_routeStop == null)
+            {
+                _routeStop = new RouteStopRepository(_contextdb);
+            }
+
+            return _routeStop;
         }
     }
 }

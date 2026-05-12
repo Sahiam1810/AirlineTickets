@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Routes;
+using Domain.ValueObjects.Routes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,16 +13,28 @@ public sealed class RouteStopConfiguration : IEntityTypeConfiguration<RouteStop>
         builder.ToTable("routestops");
         builder.HasKey(rs => rs.Id);
         builder.Property(rs => rs.Id).HasColumnName("id");
-        builder.Property(rs => rs.RouteId).HasColumnName("route_id");
-        builder.Property(rs => rs.StopAirportId).HasColumnName("stop_airport_id");
-        builder.Property(rs => rs.Order).HasColumnName("order");
-        builder.Property(rs => rs.StopDurationMin).HasColumnName("stop_duration_min");
+        builder.Property(rs => rs.RouteId).HasColumnName("route_id").IsRequired();
+        builder.Property(rs => rs.StopAirportId).HasColumnName("stop_airport_id").IsRequired();
+        builder.Property(rs => rs.Order)
+            .HasColumnName("order")
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => StopOrder.Create(v));
+        builder.Property(rs => rs.StopDurationMinutes)
+            .HasColumnName("stop_duration_min")
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => StopDurationMinutes.Create(v));
         builder.HasIndex(rs => new { rs.RouteId, rs.Order }).IsUnique();
         builder.HasOne(rs => rs.Route)
-            .WithMany(r => r.RouteStops)
-            .HasForeignKey(rs => rs.RouteId);
+            .WithMany()
+            .HasForeignKey(rs => rs.RouteId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(rs => rs.StopAirport)
             .WithMany()
-            .HasForeignKey(rs => rs.StopAirportId);
+            .HasForeignKey(rs => rs.StopAirportId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
