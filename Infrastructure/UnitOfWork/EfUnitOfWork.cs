@@ -16,6 +16,7 @@ using Infrastructure.Repositories.PersonPhones;
 using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
+using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffRoles;
 
 namespace Infrastructure.UnitOfWork;
@@ -40,6 +41,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAirportRepository? _airport;
     public IAirportAirlineRepository? _airportAirline;
     public IStaffRoleRepository? _staffRole;
+    public IStaffRepository? _staff;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -283,6 +285,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _staffRole;
+        }
+    }
+
+    public IStaffRepository Staff
+    {
+        get
+        {
+            if (_staff == null)
+            {
+                _staff = new StaffRepository(_contextdb);
+            }
+
+            return _staff;
         }
     }
 }

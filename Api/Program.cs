@@ -16,6 +16,7 @@ using Infrastructure.Repositories.PersonPhones;
 using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
+using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffRoles;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +47,7 @@ builder.Services.AddScoped<IPersonPhoneRepository, PersonPhoneRepository>();
 builder.Services.AddScoped<IPhoneCodeRepository, PhoneCodeRepository>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IRoadTypeRepository, RoadTypeRepository>();
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 builder.Services.AddScoped<IStaffRoleRepository, StaffRoleRepository>();
 
 var app = builder.Build();
