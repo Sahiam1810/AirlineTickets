@@ -40,7 +40,7 @@ public sealed class AppDbContext : DbContext
     // Airlines
     public DbSet<Airline> Airlines => Set<Airline>();
     public DbSet<Airport> Airports => Set<Airport>();
-    public DbSet<AirportAirline> AirportAirlines { get; set; } = default!;
+    public DbSet<AirportAirline> AirportAirlines => Set<AirportAirline>();
 
     // Staff
     public DbSet<StaffRole> StaffRoles { get; set; } = default!;

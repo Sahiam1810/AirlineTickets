@@ -19,6 +19,7 @@ public interface IUnitOfWork
     IClientRepository Clients { get; }
     IAirlineRepository Airlines { get; }
     IAirportRepository Airports { get; }
+    IAirportAirlineRepository AirportAirlines { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
