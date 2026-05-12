@@ -4,6 +4,7 @@ using Application;
 using Infrastructure;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Regions;
+using Infrastructure.Repositories.RoadTypes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddMapsterConfiguration();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<IRoadTypeRepository, RoadTypeRepository>();
 
 var app = builder.Build();
 

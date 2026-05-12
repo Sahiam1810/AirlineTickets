@@ -4,6 +4,7 @@ using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.Regions;
+using Infrastructure.Repositories.RoadTypes;
 
 namespace Infrastructure.UnitOfWork;
 
@@ -14,6 +15,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ICountryRepository? _country;
     public IRegionRepository? _region;
     public ICityRepository? _city;
+    public IRoadTypeRepository? _roadType;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -88,6 +90,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _city;
+        }
+    }
+
+    public IRoadTypeRepository RoadTypes
+    {
+        get
+        {
+            if (_roadType == null)
+            {
+                _roadType = new RoadTypeRepository(_contextdb);
+            }
+
+            return _roadType;
         }
     }
 }

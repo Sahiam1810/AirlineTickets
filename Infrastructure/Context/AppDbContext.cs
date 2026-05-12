@@ -23,7 +23,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<City> Cities => Set<City>();
 
     // Location
-    public DbSet<RoadType> RoadTypes { get; set; } = default!;
+    public DbSet<RoadType> RoadTypes => Set<RoadType>();
     public DbSet<Address> Addresses { get; set; } = default!;
 
     // People

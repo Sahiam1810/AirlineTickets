@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Location;
+using Domain.ValueObjects.Location;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,6 +13,11 @@ public sealed class RoadTypeConfiguration : IEntityTypeConfiguration<RoadType>
         builder.ToTable("roadtypes");
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Id).HasColumnName("id");
-        builder.Property(r => r.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
+        builder.Property(r => r.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired()
+            .HasConversion(v => v.Value, v => RoadTypeName.Create(v));
+        builder.HasIndex(r => r.Name).IsUnique();
     }
 }
