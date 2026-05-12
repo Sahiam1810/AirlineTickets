@@ -19,7 +19,7 @@ public sealed class AppDbContext : DbContext
     // Geography
     public DbSet<Continent> Continents { get; set; } = default!;
     public DbSet<Country> Countries { get; set; } = default!;
-    public DbSet<Region> Regions { get; set; } = default!;
+    public DbSet<Region> Regions => Set<Region>();
     public DbSet<City> Cities { get; set; } = default!;
 
     // Location

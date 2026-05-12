@@ -17,10 +17,18 @@ public sealed class RegionConfiguration : IEntityTypeConfiguration<Region>
             .HasMaxLength(100)
             .IsRequired()
             .HasConversion(v => v.Value, v => RegionName.Create(v));
-        builder.Property(r => r.Type).HasColumnName("type").HasMaxLength(30).IsRequired();
-        builder.Property(r => r.CountryId).HasColumnName("country_id");
+        builder.Property(r => r.Type)
+            .HasColumnName("type")
+            .HasMaxLength(30)
+            .IsRequired()
+            .HasConversion(v => v.Value, v => RegionType.Create(v));
+        builder.Property(r => r.CountryId)
+            .HasColumnName("country_id")
+            .IsRequired();
+        builder.HasIndex(r => new { r.Name, r.CountryId }).IsUnique();
         builder.HasOne(r => r.Country)
-            .WithMany(c => c.Regions)
-            .HasForeignKey(r => r.CountryId);
+            .WithMany()
+            .HasForeignKey(r => r.CountryId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

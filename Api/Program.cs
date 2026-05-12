@@ -1,6 +1,8 @@
 using Api.Extensions;
+using Application.Abstractions;
 using Application;
 using Infrastructure;
+using Infrastructure.Repositories.Regions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.ConfigureCors();
 builder.Services.AddApplicationServices();
 builder.Services.AddMapsterConfiguration();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 
 var app = builder.Build();
 

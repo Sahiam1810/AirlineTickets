@@ -6,6 +6,7 @@ public interface IUnitOfWork
 {
     IContinent Continents { get; }
     ICountryRepository Countries { get; }
+    IRegionRepository Regions { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
