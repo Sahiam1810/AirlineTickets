@@ -11,6 +11,7 @@ public interface IUnitOfWork
     IRoadTypeRepository RoadTypes { get; }
     IAddressRepository Addresses { get; }
     IDocumentTypeRepository DocumentTypes { get; }
+    IPersonRepository People { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

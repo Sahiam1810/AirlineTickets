@@ -5,6 +5,7 @@ using Infrastructure;
 using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.DocumentTypes;
+using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
 
@@ -25,6 +26,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IDocumentTypeRepository, DocumentTypeRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IRoadTypeRepository, RoadTypeRepository>();
 
