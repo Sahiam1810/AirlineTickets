@@ -17,6 +17,7 @@ using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
 using Infrastructure.Repositories.People;
+using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.PersonEmails;
 using Infrastructure.Repositories.PersonPhones;
 using Infrastructure.Repositories.PhoneCodes;
@@ -47,6 +48,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IPersonEmailRepository? _personEmail;
     public IPersonPhoneRepository? _personPhone;
     public IClientRepository? _client;
+    public IPassengerTypeRepository? _passengerType;
     public IAirlineRepository? _airline;
     public IAirportRepository? _airport;
     public IAirportAirlineRepository? _airportAirline;
@@ -253,6 +255,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _client;
+        }
+    }
+
+    public IPassengerTypeRepository PassengerTypes
+    {
+        get
+        {
+            if (_passengerType == null)
+            {
+                _passengerType = new PassengerTypeRepository(_contextdb);
+            }
+
+            return _passengerType;
         }
     }
 

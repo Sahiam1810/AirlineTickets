@@ -17,6 +17,7 @@ public interface IUnitOfWork
     IPersonEmailRepository PersonEmails { get; }
     IPersonPhoneRepository PersonPhones { get; }
     IClientRepository Clients { get; }
+    IPassengerTypeRepository PassengerTypes { get; }
     IAirlineRepository Airlines { get; }
     IAirportRepository Airports { get; }
     IAirportAirlineRepository AirportAirlines { get; }
