@@ -24,7 +24,7 @@ public sealed class AppDbContext : DbContext
 
     // Location
     public DbSet<RoadType> RoadTypes => Set<RoadType>();
-    public DbSet<Address> Addresses { get; set; } = default!;
+    public DbSet<Address> Addresses => Set<Address>();
 
     // People
     public DbSet<DocumentType> DocumentTypes { get; set; } = default!;

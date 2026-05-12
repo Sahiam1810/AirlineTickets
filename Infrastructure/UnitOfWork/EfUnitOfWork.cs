@@ -1,5 +1,6 @@
 using Application.Abstractions;
 using Infrastructure.Context;
+using Infrastructure.Repositories.Addresses;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
@@ -16,6 +17,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IRegionRepository? _region;
     public ICityRepository? _city;
     public IRoadTypeRepository? _roadType;
+    public IAddressRepository? _address;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -103,6 +105,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _roadType;
+        }
+    }
+
+    public IAddressRepository Addresses
+    {
+        get
+        {
+            if (_address == null)
+            {
+                _address = new AddressRepository(_contextdb);
+            }
+
+            return _address;
         }
     }
 }
