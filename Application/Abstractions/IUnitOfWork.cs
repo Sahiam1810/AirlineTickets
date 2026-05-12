@@ -15,6 +15,7 @@ public interface IUnitOfWork
     IEmailDomainRepository EmailDomains { get; }
     IPhoneCodeRepository PhoneCodes { get; }
     IPersonEmailRepository PersonEmails { get; }
+    IPersonPhoneRepository PersonPhones { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
