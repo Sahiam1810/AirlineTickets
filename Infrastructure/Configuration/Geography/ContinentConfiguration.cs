@@ -1,5 +1,5 @@
-using System;
 using Domain.Entities.Geography;
+using Domain.ValueObjects.Continents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +12,15 @@ public sealed class ContinentConfiguration : IEntityTypeConfiguration<Continent>
         builder.ToTable("continents");
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id).HasColumnName("id");
-        builder.Property(c => c.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
+        builder.Property(c => c.Name)
+            .HasColumnName("name")
+            .HasMaxLength(100)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => ContinentName.Create(v));
         builder.HasIndex(c => c.Name).IsUnique();
+
+        
     }
 }

@@ -23,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Dtos\Continents\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Mappings\" />
   </ItemGroup>
 
 </Project>

@@ -21,6 +21,10 @@
     <Folder Include="Entities\Routes\" />
     <Folder Include="Entities\Staff\" />
     <Folder Include="Entities\Tickets\" />
+    <Folder Include="Enums\" />
+    <Folder Include="ValueObjects\" />
+    <Folder Include="ValueObjects\Continents\" />
+    <Folder Include="ValueObjects\Geography\" />
   </ItemGroup>
 
 </Project>

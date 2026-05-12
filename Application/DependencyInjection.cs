@@ -15,6 +15,7 @@ public static class DependencyInjection
             cfg.RegisterServicesFromAssembly(applicationAssembly));
 
         services.AddValidatorsFromAssembly(applicationAssembly);
+        
         return services;
     }
 }

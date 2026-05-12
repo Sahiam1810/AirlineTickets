@@ -1,13 +1,13 @@
-using System;
 using Application.Abstractions;
 using Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.Repositories.Continents;
 
 namespace Infrastructure.UnitOfWork;
 
 public class EfUnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _contextdb;
+    public IContinent? _continent;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -30,6 +30,19 @@ public class EfUnitOfWork : IUnitOfWork
         {
             await tx.RollbackAsync(ct);
             throw;
+        }
+    }
+
+    public IContinent Continents
+    {
+        get
+        {
+            if (_continent == null)
+            {
+                _continent = new ContinentRepository(_contextdb);
+            }
+
+            return _continent;
         }
     }
 }

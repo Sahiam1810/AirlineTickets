@@ -1,5 +1,5 @@
-using System;
 using Domain.Entities.Geography;
+using Domain.ValueObjects.Geography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +12,11 @@ public sealed class RegionConfiguration : IEntityTypeConfiguration<Region>
         builder.ToTable("regions");
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Id).HasColumnName("id");
-        builder.Property(r => r.Name).HasColumnName("name").HasMaxLength(100).IsRequired();
+        builder.Property(r => r.Name)
+            .HasColumnName("name")
+            .HasMaxLength(100)
+            .IsRequired()
+            .HasConversion(v => v.Value, v => RegionName.Create(v));
         builder.Property(r => r.Type).HasColumnName("type").HasMaxLength(30).IsRequired();
         builder.Property(r => r.CountryId).HasColumnName("country_id");
         builder.HasOne(r => r.Country)

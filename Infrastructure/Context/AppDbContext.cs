@@ -16,89 +16,91 @@ namespace Infrastructure.Context;
 
 public sealed class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
     // Geography
-    public DbSet<Continent> Continents => Set<Continent>();
-    public DbSet<Country> Countries => Set<Country>();
-    public DbSet<Region> Regions => Set<Region>();
-    public DbSet<City> Cities => Set<City>();
+    public DbSet<Continent> Continents { get; set; } = default!;
+    public DbSet<Country> Countries { get; set; } = default!;
+    public DbSet<Region> Regions { get; set; } = default!;
+    public DbSet<City> Cities { get; set; } = default!;
 
     // Location
-    public DbSet<RoadType> RoadTypes => Set<RoadType>();
-    public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<RoadType> RoadTypes { get; set; } = default!;
+    public DbSet<Address> Addresses { get; set; } = default!;
 
     // People
-    public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
-    public DbSet<Person> People => Set<Person>();
-    public DbSet<EmailDomain> EmailDomains => Set<EmailDomain>();
-    public DbSet<PhoneCode> PhoneCodes => Set<PhoneCode>();
-    public DbSet<PersonEmail> PersonEmails => Set<PersonEmail>();
-    public DbSet<PersonPhone> PersonPhones => Set<PersonPhone>();
-    public DbSet<Client> Clients => Set<Client>();
-    public DbSet<PassengerType> PassengerTypes => Set<PassengerType>();
-    public DbSet<Passenger> Passengers => Set<Passenger>();
+    public DbSet<DocumentType> DocumentTypes { get; set; } = default!;
+    public DbSet<Person> People { get; set; } = default!;
+    public DbSet<EmailDomain> EmailDomains { get; set; } = default!;
+    public DbSet<PhoneCode> PhoneCodes { get; set; } = default!;
+    public DbSet<PersonEmail> PersonEmails { get; set; } = default!;
+    public DbSet<PersonPhone> PersonPhones { get; set; } = default!;
+    public DbSet<Client> Clients { get; set; } = default!;
+    public DbSet<PassengerType> PassengerTypes { get; set; } = default!;
+    public DbSet<Passenger> Passengers { get; set; } = default!;
 
     // Airlines
-    public DbSet<Airline> Airlines => Set<Airline>();
-    public DbSet<Airport> Airports => Set<Airport>();
-    public DbSet<AirportAirline> AirportAirlines => Set<AirportAirline>();
+    public DbSet<Airline> Airlines { get; set; } = default!;
+    public DbSet<Airport> Airports { get; set; } = default!;
+    public DbSet<AirportAirline> AirportAirlines { get; set; } = default!;
 
     // Staff
-    public DbSet<StaffRole> StaffRoles => Set<StaffRole>();
-    public DbSet<StaffMember> StaffMembers => Set<StaffMember>();
-    public DbSet<AvailabilityStatus> AvailabilityStatuses => Set<AvailabilityStatus>();
-    public DbSet<StaffAvailability> StaffAvailabilities => Set<StaffAvailability>();
+    public DbSet<StaffRole> StaffRoles { get; set; } = default!;
+    public DbSet<StaffMember> StaffMembers { get; set; } = default!;
+    public DbSet<AvailabilityStatus> AvailabilityStatuses { get; set; } = default!;
+    public DbSet<StaffAvailability> StaffAvailabilities { get; set; } = default!;
 
     // Aircraft
-    public DbSet<AircraftManufacturer> AircraftManufacturers => Set<AircraftManufacturer>();
-    public DbSet<AircraftModel> AircraftModels => Set<AircraftModel>();
-    public DbSet<AircraftUnit> AircraftUnits => Set<AircraftUnit>();
-    public DbSet<CabinType> CabinTypes => Set<CabinType>();
-    public DbSet<CabinConfiguration> CabinConfigurations => Set<CabinConfiguration>();
+    public DbSet<AircraftManufacturer> AircraftManufacturers { get; set; } = default!;
+    public DbSet<AircraftModel> AircraftModels { get; set; } = default!;
+    public DbSet<AircraftUnit> AircraftUnits { get; set; } = default!;
+    public DbSet<CabinType> CabinTypes { get; set; } = default!;
+    public DbSet<CabinConfiguration> CabinConfigurations { get; set; } = default!;
 
     // Routes
-    public DbSet<Domain.Entities.Routes.Route> Routes => Set<Domain.Entities.Routes.Route>();
-    public DbSet<RouteStop> RouteStops => Set<RouteStop>();
-    public DbSet<Season> Seasons => Set<Season>();
-    public DbSet<Fare> Fares => Set<Fare>();
+    public DbSet<Domain.Entities.Routes.Route> Routes { get; set; } = default!;
+    public DbSet<RouteStop> RouteStops { get; set; } = default!;
+    public DbSet<Season> Seasons { get; set; } = default!;
+    public DbSet<Fare> Fares { get; set; } = default!;
 
     // Flights
-    public DbSet<FlightState> FlightStates => Set<FlightState>();
-    public DbSet<FlightStatusTransition> FlightStatusTransitions => Set<FlightStatusTransition>();
-    public DbSet<Flight> Flights => Set<Flight>();
-    public DbSet<FlightRole> FlightRoles => Set<FlightRole>();
-    public DbSet<FlightAssignment> FlightAssignments => Set<FlightAssignment>();
-    public DbSet<SeatLocationType> SeatLocationTypes => Set<SeatLocationType>();
-    public DbSet<FlightSeat> FlightSeats => Set<FlightSeat>();
+    public DbSet<FlightState> FlightStates { get; set; } = default!;
+    public DbSet<FlightStatusTransition> FlightStatusTransitions { get; set; } = default!;
+    public DbSet<Flight> Flights { get; set; } = default!;
+    public DbSet<FlightRole> FlightRoles { get; set; } = default!;
+    public DbSet<FlightAssignment> FlightAssignments { get; set; } = default!;
+    public DbSet<SeatLocationType> SeatLocationTypes { get; set; } = default!;
+    public DbSet<FlightSeat> FlightSeats { get; set; } = default!;
 
     // Reservations
-    public DbSet<ReservationStatus> ReservationStatuses => Set<ReservationStatus>();
-    public DbSet<ReservationStatusTransition> ReservationStatusTransitions => Set<ReservationStatusTransition>();
-    public DbSet<Reservation> Reservations => Set<Reservation>();
-    public DbSet<ReservationFlight> ReservationFlights => Set<ReservationFlight>();
-    public DbSet<ReservationPassenger> ReservationPassengers => Set<ReservationPassenger>();
+    public DbSet<ReservationStatus> ReservationStatuses { get; set; } = default!;
+    public DbSet<ReservationStatusTransition> ReservationStatusTransitions { get; set; } = default!;
+    public DbSet<Reservation> Reservations { get; set; } = default!;
+    public DbSet<ReservationFlight> ReservationFlights { get; set; } = default!;
+    public DbSet<ReservationPassenger> ReservationPassengers { get; set; } = default!;
 
     // Tickets
-    public DbSet<TicketStatus> TicketStatuses => Set<TicketStatus>();
-    public DbSet<Ticket> Tickets => Set<Ticket>();
-    public DbSet<CheckInStatus> CheckInStatuses => Set<CheckInStatus>();
-    public DbSet<CheckIn> CheckIns => Set<CheckIn>();
+    public DbSet<TicketStatus> TicketStatuses { get; set; } = default!;
+    public DbSet<Ticket> Tickets { get; set; } = default!;
+    public DbSet<CheckInStatus> CheckInStatuses { get; set; } = default!;
+    public DbSet<CheckIn> CheckIns { get; set; } = default!;
 
     // Payments
-    public DbSet<PaymentState> PaymentStates => Set<PaymentState>();
-    public DbSet<PaymentMethodType> PaymentMethodTypes => Set<PaymentMethodType>();
-    public DbSet<CardType> CardTypes => Set<CardType>();
-    public DbSet<CardIssuer> CardIssuers => Set<CardIssuer>();
-    public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
-    public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<PaymentState> PaymentStates { get; set; } = default!;
+    public DbSet<PaymentMethodType> PaymentMethodTypes { get; set; } = default!;
+    public DbSet<CardType> CardTypes { get; set; } = default!;
+    public DbSet<CardIssuer> CardIssuers { get; set; } = default!;
+    public DbSet<PaymentMethod> PaymentMethods { get; set; } = default!;
+    public DbSet<Payment> Payments { get; set; } = default!;
 
     // Auth
-    public DbSet<SystemRole> SystemRoles => Set<SystemRole>();
-    public DbSet<Permission> Permissions => Set<Permission>();
-    public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
-    public DbSet<User> Users => Set<User>();
-    public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<SystemRole> SystemRoles { get; set; } = default!;
+    public DbSet<Permission> Permissions { get; set; } = default!;
+    public DbSet<RolePermission> RolePermissions { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = default!;
+    public DbSet<Session> Sessions { get; set; } = default!;
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

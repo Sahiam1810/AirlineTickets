@@ -38,6 +38,8 @@
     <Folder Include="Configuration\Staff\" />
     <Folder Include="Configuration\Tickets\" />
     <Folder Include="Context\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Continents\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
