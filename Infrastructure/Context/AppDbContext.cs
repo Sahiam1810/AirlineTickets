@@ -55,7 +55,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<AircraftUnit> Aircraft => Set<AircraftUnit>();
     public DbSet<AircraftUnit> AircraftUnits => Set<AircraftUnit>();
     public DbSet<CabinType> CabinTypes => Set<CabinType>();
-    public DbSet<CabinConfiguration> CabinConfigurations { get; set; } = default!;
+    public DbSet<CabinConfiguration> CabinConfigurations => Set<CabinConfiguration>();
 
     // Routes
     public DbSet<Domain.Entities.Routes.Route> Routes { get; set; } = default!;

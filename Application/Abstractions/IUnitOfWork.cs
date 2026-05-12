@@ -24,6 +24,7 @@ public interface IUnitOfWork
     IAircraftModelRepository AircraftModels { get; }
     IAircraftRepository Aircraft { get; }
     ICabinTypeRepository CabinTypes { get; }
+    ICabinConfigurationRepository CabinConfigurations { get; }
     IStaffRoleRepository StaffRoles { get; }
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }

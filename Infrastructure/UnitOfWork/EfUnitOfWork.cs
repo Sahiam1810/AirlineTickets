@@ -8,6 +8,7 @@ using Infrastructure.Repositories.Airlines;
 using Infrastructure.Repositories.AirportAirlines;
 using Infrastructure.Repositories.Airports;
 using Infrastructure.Repositories.AvailabilityStatuses;
+using Infrastructure.Repositories.CabinConfigurations;
 using Infrastructure.Repositories.CabinTypes;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Clients;
@@ -50,6 +51,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAircraftModelRepository? _aircraftModel;
     public IAircraftRepository? _aircraft;
     public ICabinTypeRepository? _cabinType;
+    public ICabinConfigurationRepository? _cabinConfiguration;
     public IStaffRoleRepository? _staffRole;
     public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffAvailabilityRepository? _staffAvailability;
@@ -336,6 +338,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _cabinType;
+        }
+    }
+
+    public ICabinConfigurationRepository CabinConfigurations
+    {
+        get
+        {
+            if (_cabinConfiguration == null)
+            {
+                _cabinConfiguration = new CabinConfigurationRepository(_contextdb);
+            }
+
+            return _cabinConfiguration;
         }
     }
 
