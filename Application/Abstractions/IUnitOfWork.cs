@@ -33,6 +33,7 @@ public interface IUnitOfWork
     IRouteRepository Routes { get; }
     IRouteStopRepository RouteStops { get; }
     ISeasonRepository Seasons { get; }
+    IFareRepository Fares { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

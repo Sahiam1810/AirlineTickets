@@ -61,7 +61,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Domain.Entities.Routes.Route> Routes => Set<Domain.Entities.Routes.Route>();
     public DbSet<RouteStop> RouteStops => Set<RouteStop>();
     public DbSet<Season> Seasons => Set<Season>();
-    public DbSet<Fare> Fares { get; set; } = default!;
+    public DbSet<Fare> Fares => Set<Fare>();
 
     // Flights
     public DbSet<FlightState> FlightStates { get; set; } = default!;

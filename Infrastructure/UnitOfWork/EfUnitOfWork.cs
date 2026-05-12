@@ -16,6 +16,7 @@ using Infrastructure.Repositories.Continents;
 using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
+using Infrastructure.Repositories.Fares;
 using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.PersonEmails;
@@ -64,6 +65,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IRouteRepository? _route;
     public IRouteStopRepository? _routeStop;
     public ISeasonRepository? _season;
+    public IFareRepository? _fare;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -463,6 +465,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _season;
+        }
+    }
+
+    public IFareRepository Fares
+    {
+        get
+        {
+            if (_fare == null)
+            {
+                _fare = new FareRepository(_contextdb);
+            }
+
+            return _fare;
         }
     }
 }
