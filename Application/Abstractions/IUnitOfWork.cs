@@ -13,6 +13,7 @@ public interface IUnitOfWork
     IDocumentTypeRepository DocumentTypes { get; }
     IPersonRepository People { get; }
     IEmailDomainRepository EmailDomains { get; }
+    IPhoneCodeRepository PhoneCodes { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

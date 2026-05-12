@@ -30,7 +30,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
     public DbSet<Person> People => Set<Person>();
     public DbSet<EmailDomain> EmailDomains => Set<EmailDomain>();
-    public DbSet<PhoneCode> PhoneCodes { get; set; } = default!;
+    public DbSet<PhoneCode> PhoneCodes => Set<PhoneCode>();
     public DbSet<PersonEmail> PersonEmails { get; set; } = default!;
     public DbSet<PersonPhone> PersonPhones { get; set; } = default!;
     public DbSet<Client> Clients { get; set; } = default!;
