@@ -1,6 +1,7 @@
 using Application.Abstractions;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Addresses;
+using Infrastructure.Repositories.Aircraft;
 using Infrastructure.Repositories.AircraftManufacturers;
 using Infrastructure.Repositories.AircraftModels;
 using Infrastructure.Repositories.Airlines;
@@ -46,6 +47,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IAirportAirlineRepository? _airportAirline;
     public IAircraftManufacturerRepository? _aircraftManufacturer;
     public IAircraftModelRepository? _aircraftModel;
+    public IAircraftRepository? _aircraft;
     public IStaffRoleRepository? _staffRole;
     public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffAvailabilityRepository? _staffAvailability;
@@ -306,6 +308,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _aircraftModel;
+        }
+    }
+
+    public IAircraftRepository Aircraft
+    {
+        get
+        {
+            if (_aircraft == null)
+            {
+                _aircraft = new AircraftRepository(_contextdb);
+            }
+
+            return _aircraft;
         }
     }
 
