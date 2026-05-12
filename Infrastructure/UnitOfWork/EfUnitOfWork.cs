@@ -7,6 +7,7 @@ using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
 using Infrastructure.Repositories.People;
+using Infrastructure.Repositories.PersonEmails;
 using Infrastructure.Repositories.PhoneCodes;
 using Infrastructure.Repositories.Regions;
 using Infrastructure.Repositories.RoadTypes;
@@ -26,6 +27,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IPersonRepository? _person;
     public IEmailDomainRepository? _emailDomain;
     public IPhoneCodeRepository? _phoneCode;
+    public IPersonEmailRepository? _personEmail;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -178,6 +180,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _phoneCode;
+        }
+    }
+
+    public IPersonEmailRepository PersonEmails
+    {
+        get
+        {
+            if (_personEmail == null)
+            {
+                _personEmail = new PersonEmailRepository(_contextdb);
+            }
+
+            return _personEmail;
         }
     }
 }
