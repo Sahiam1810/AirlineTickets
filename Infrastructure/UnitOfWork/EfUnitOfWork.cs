@@ -34,6 +34,7 @@ using Infrastructure.Repositories.RoadTypes;
 using Infrastructure.Repositories.Routes;
 using Infrastructure.Repositories.RouteStops;
 using Infrastructure.Repositories.ReservationStatuses;
+using Infrastructure.Repositories.ReservationStatusTransitions;
 using Infrastructure.Repositories.Seasons;
 using Infrastructure.Repositories.SeatLocationTypes;
 using Infrastructure.Repositories.Staff;
@@ -84,6 +85,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ISeatLocationTypeRepository? _seatLocationType;
     public IFlightSeatRepository? _flightSeat;
     public IReservationStatusRepository? _reservationStatus;
+    public IReservationStatusTransitionRepository? _reservationStatusTransition;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -613,6 +615,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _reservationStatus;
+        }
+    }
+
+    public IReservationStatusTransitionRepository ReservationStatusTransitions
+    {
+        get
+        {
+            if (_reservationStatusTransition == null)
+            {
+                _reservationStatusTransition = new ReservationStatusTransitionRepository(_contextdb);
+            }
+
+            return _reservationStatusTransition;
         }
     }
 }
