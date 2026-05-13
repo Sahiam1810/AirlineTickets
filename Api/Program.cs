@@ -44,6 +44,7 @@ using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
 using Infrastructure.Repositories.TicketStatuses;
+using Infrastructure.Repositories.Tickets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,6 +102,7 @@ builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 builder.Services.AddScoped<IStaffAvailabilityRepository, StaffAvailabilityRepository>();
 builder.Services.AddScoped<IStaffRoleRepository, StaffRoleRepository>();
 builder.Services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 var app = builder.Build();
 

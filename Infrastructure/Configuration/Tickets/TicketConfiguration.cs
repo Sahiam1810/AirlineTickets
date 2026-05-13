@@ -1,4 +1,3 @@
-using System;
 using Domain.Entities.Tickets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,19 +11,45 @@ public sealed class TicketConfiguration : IEntityTypeConfiguration<Ticket>
         builder.ToTable("tickets");
         builder.HasKey(t => t.Id);
         builder.Property(t => t.Id).HasColumnName("id");
-        builder.Property(t => t.ReservationPassengerId).HasColumnName("reservation_passenger_id");
-        builder.Property(t => t.TicketCode).HasColumnName("ticket_code").HasMaxLength(30).IsRequired();
-        builder.Property(t => t.IssuedAt).HasColumnName("issued_at");
-        builder.Property(t => t.TicketStatusId).HasColumnName("ticket_status_id");
-        builder.Property(t => t.CreatedAt).HasColumnName("created_at");
-        builder.Property(t => t.UpdatedAt).HasColumnName("updated_at");
+
+        builder.Property(t => t.ReservationPassengerId)
+            .HasColumnName("reservation_passenger_id")
+            .IsRequired();
+
+        builder.Property(t => t.TicketCode)
+            .HasColumnName("ticket_code")
+            .HasMaxLength(30)
+            .IsRequired();
+
+        builder.Property(t => t.IssuedAt)
+            .HasColumnName("issued_at")
+            .IsRequired();
+
+        builder.Property(t => t.TicketStatusId)
+            .HasColumnName("ticket_status_id")
+            .IsRequired();
+
+        builder.Property(t => t.CreatedAt)
+            .HasColumnName("created_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        builder.Property(t => t.UpdatedAt)
+            .HasColumnName("updated_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
         builder.HasIndex(t => t.ReservationPassengerId).IsUnique();
         builder.HasIndex(t => t.TicketCode).IsUnique();
+
         builder.HasOne(t => t.ReservationPassenger)
-            .WithMany()
-            .HasForeignKey(t => t.ReservationPassengerId);
+            .WithOne()
+            .HasForeignKey<Ticket>(t => t.ReservationPassengerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.HasOne(t => t.TicketStatus)
-            .WithMany(ts => ts.Tickets)
-            .HasForeignKey(t => t.TicketStatusId);
+            .WithMany()
+            .HasForeignKey(t => t.TicketStatusId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

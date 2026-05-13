@@ -44,6 +44,7 @@ using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
 using Infrastructure.Repositories.TicketStatuses;
+using Infrastructure.Repositories.Tickets;
 
 namespace Infrastructure.UnitOfWork;
 
@@ -94,6 +95,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IReservationPassengerRepository? _reservationPassenger;
     public IReservationRepository? _reservation;
     public ITicketStatusRepository? _ticketStatus;
+    public ITicketRepository? _ticket;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -688,6 +690,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _ticketStatus;
+        }
+    }
+
+    public ITicketRepository Tickets
+    {
+        get
+        {
+            if (_ticket == null)
+            {
+                _ticket = new TicketRepository(_contextdb);
+            }
+
+            return _ticket;
         }
     }
 }
