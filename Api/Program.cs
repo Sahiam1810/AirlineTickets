@@ -47,7 +47,7 @@ using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
 using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
-
+using Infrastructure.Repositories.InvoiceItemTypes;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -107,6 +107,7 @@ builder.Services.AddScoped<IStaffAvailabilityRepository, StaffAvailabilityReposi
 builder.Services.AddScoped<IStaffRoleRepository, StaffRoleRepository>();
 builder.Services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IInvoiceItemTypeRepository, InvoiceItemTypeRepository>();
 
 var app = builder.Build();
 
