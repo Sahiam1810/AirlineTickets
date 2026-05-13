@@ -77,7 +77,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<ReservationStatusTransition> ReservationStatusTransitions => Set<ReservationStatusTransition>();
     public DbSet<Reservation> Reservations { get; set; } = default!;
     public DbSet<ReservationFlight> ReservationFlights => Set<ReservationFlight>();
-    public DbSet<ReservationPassenger> ReservationPassengers { get; set; } = default!;
+    public DbSet<ReservationPassenger> ReservationPassengers => Set<ReservationPassenger>();
 
     // Tickets
     public DbSet<TicketStatus> TicketStatuses { get; set; } = default!;
