@@ -7,32 +7,22 @@ using MediatR;
 
 namespace Application.UseCase.PaymentMethodTypes;
 
-public sealed class UpdatePaymentMethodTypeHandler : IRequestHandler<UpdatePaymentMethodType>
+public sealed class UpdatePaymentMethodTypeHandler(IUnitOfWork uow) : IRequestHandler<UpdatePaymentMethodType>
 {
-    private readonly IUnitOfWork _uow;
-
-    public UpdatePaymentMethodTypeHandler(IUnitOfWork uow)
+    public async Task Handle(UpdatePaymentMethodType request, CancellationToken ct)
     {
-        _uow = uow;
-    }
-
-    public async Task Handle(UpdatePaymentMethodType req, CancellationToken ct)
-    {
-        var paymentMethodType = await _uow.PaymentMethodTypes.GetByIdAsync(req.Id, ct);
+        var paymentMethodType = await uow.PaymentMethodTypes.GetByIdAsync(request.Id, ct);
+        
         if (paymentMethodType is null)
         {
-            throw new KeyNotFoundException($"Payment method type with id {req.Id} was not found.");
+            throw new KeyNotFoundException($"Payment method type with id {request.Id} was not found.");
         }
 
-        if (!string.Equals(paymentMethodType.Name, req.Name?.Trim(), StringComparison.OrdinalIgnoreCase)
-            && await _uow.PaymentMethodTypes.ExistsAsync(req.Name, ct))
-        {
-            throw new InvalidOperationException($"Payment method type with name '{req.Name}' already exists.");
-        }
+        paymentMethodType.Update(
+            request.Name
+        );
 
-        paymentMethodType.Update(req.Name);
-
-        await _uow.PaymentMethodTypes.UpdateAsync(paymentMethodType, ct);
-        await _uow.SaveChangesAsync(ct);
+        await uow.PaymentMethodTypes.UpdateAsync(paymentMethodType, ct);
+        await uow.SaveChangesAsync(ct);
     }
 }
