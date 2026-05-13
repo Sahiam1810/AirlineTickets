@@ -1,7 +1,9 @@
 using System;
 using Domain.Entities.Reservations;
+using Domain.ValueObjects.ReservationStatuses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Configuration.Reservations;
 
@@ -12,7 +14,17 @@ public sealed class ReservationStatusConfiguration : IEntityTypeConfiguration<Re
         builder.ToTable("reservationstatuses");
         builder.HasKey(rs => rs.Id);
         builder.Property(rs => rs.Id).HasColumnName("id");
-        builder.Property(rs => rs.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
+
+        var nameConverter = new ValueConverter<ReservationStatusName, string>(
+            name => name.Value,
+            value => ReservationStatusName.Create(value));
+
+        builder.Property(rs => rs.Name)
+            .HasColumnName("name")
+            .HasConversion(nameConverter)
+            .HasMaxLength(50)
+            .IsRequired();
+
         builder.HasIndex(rs => rs.Name).IsUnique();
     }
 }
