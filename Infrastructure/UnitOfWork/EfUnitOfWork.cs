@@ -43,6 +43,7 @@ using Infrastructure.Repositories.SeatLocationTypes;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
+using Infrastructure.Repositories.TicketStatuses;
 
 namespace Infrastructure.UnitOfWork;
 
@@ -92,6 +93,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IReservationFlightRepository? _reservationFlight;
     public IReservationPassengerRepository? _reservationPassenger;
     public IReservationRepository? _reservation;
+    public ITicketStatusRepository? _ticketStatus;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -673,6 +675,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _reservationPassenger;
+        }
+    }
+
+    public ITicketStatusRepository TicketStatuses
+    {
+        get
+        {
+            if (_ticketStatus == null)
+            {
+                _ticketStatus = new TicketStatusRepository(_contextdb);
+            }
+
+            return _ticketStatus;
         }
     }
 }

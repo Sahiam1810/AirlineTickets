@@ -80,7 +80,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<ReservationPassenger> ReservationPassengers => Set<ReservationPassenger>();
 
     // Tickets
-    public DbSet<TicketStatus> TicketStatuses { get; set; } = default!;
+    public DbSet<TicketStatus> TicketStatuses => Set<TicketStatus>();
     public DbSet<Ticket> Tickets { get; set; } = default!;
     public DbSet<CheckInStatus> CheckInStatuses { get; set; } = default!;
     public DbSet<CheckIn> CheckIns { get; set; } = default!;
