@@ -89,6 +89,9 @@ public class EfUnitOfWork : IUnitOfWork
     public IStaffRoleRepository? _staffRole;
     public ISystemRoleRepository? _systemRole;
     public IPermissionRepository? _permission;
+    public IRolePermissionRepository? _rolePermission;
+    public IUserRepository? _user;
+    public ISessionRepository? _session;
     public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffAvailabilityRepository? _staffAvailability;
     public IStaffRepository? _staff;
@@ -481,6 +484,45 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _permission;
+        }
+    }
+
+    public IRolePermissionRepository RolePermissions
+    {
+        get
+        {
+            if (_rolePermission == null)
+            {
+                _rolePermission = new RolePermissionRepository(_contextdb);
+            }
+
+            return _rolePermission;
+        }
+    }
+
+    public IUserRepository Users
+    {
+        get
+        {
+            if (_user == null)
+            {
+                _user = new UserRepository(_contextdb);
+            }
+
+            return _user;
+        }
+    }
+
+    public ISessionRepository Sessions
+    {
+        get
+        {
+            if (_session == null)
+            {
+                _session = new SessionRepository(_contextdb);
+            }
+
+            return _session;
         }
     }
 

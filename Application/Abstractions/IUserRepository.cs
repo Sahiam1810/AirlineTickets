@@ -1,0 +1,15 @@
+using Domain.Entities.Auth;
+
+namespace Application.Abstractions;
+
+public interface IUserRepository
+{
+    Task<User?> GetByIdAsync(int id, CancellationToken ct = default);
+    Task<IReadOnlyList<User>> GetAllAsync(CancellationToken ct = default);
+    Task<IReadOnlyList<User>> GetPagedAsync(int page, int pageSize, string? search, CancellationToken ct = default);
+    Task<int> CountAsync(string? search = null, CancellationToken ct = default);
+    Task AddAsync(User user, CancellationToken ct = default);
+    Task UpdateAsync(User user, CancellationToken ct = default);
+    Task RemoveAsync(User user, CancellationToken ct = default);
+    Task<bool> ExistsByUsernameAsync(string username, CancellationToken ct = default);
+}

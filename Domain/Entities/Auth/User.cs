@@ -1,13 +1,14 @@
 using System;
 using Domain.Common;
 using Domain.Entities.People;
+using Domain.ValueObjects.Auth;
 
 namespace Domain.Entities.Auth;
 
 public sealed class User : BaseEntity<int>
 {
-    public string Username { get; private set; } = string.Empty;
-    public string PasswordHash { get; private set; } = string.Empty;
+    public Username Username { get; private set; } = null!;
+    public PasswordHash PasswordHash { get; private set; } = null!;
     public int? PersonId { get; private set; }
     public int RoleId { get; private set; }
     public bool IsActive { get; private set; }
@@ -22,8 +23,8 @@ public sealed class User : BaseEntity<int>
 
     public User(string username, string passwordHash, int? personId, int roleId)
     {
-        Username = username;
-        PasswordHash = passwordHash;
+        Username = Username.Create(username);
+        PasswordHash = PasswordHash.Create(passwordHash);
         PersonId = personId;
         RoleId = roleId;
         IsActive = true;
@@ -31,15 +32,28 @@ public sealed class User : BaseEntity<int>
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void Update(string username, int roleId, bool isActive)
+    public void Update(string username, int? personId, int roleId, bool isActive)
     {
-        Username = username;
+        Username = Username.Create(username);
+        PersonId = personId;
         RoleId = roleId;
         IsActive = isActive;
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void RecordAccess()
+    public void Activate()
+    {
+        IsActive = true;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdateLastAccess()
     {
         LastAccess = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
@@ -47,7 +61,7 @@ public sealed class User : BaseEntity<int>
 
     public void ChangePassword(string newPasswordHash)
     {
-        PasswordHash = newPasswordHash;
+        PasswordHash = PasswordHash.Create(newPasswordHash);
         UpdatedAt = DateTime.UtcNow;
     }
 }

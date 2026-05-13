@@ -30,6 +30,9 @@ public interface IUnitOfWork
     IStaffRoleRepository StaffRoles { get; }
     ISystemRoleRepository SystemRoles { get; }
     IPermissionRepository Permissions { get; }
+    IRolePermissionRepository RolePermissions { get; }
+    IUserRepository Users { get; }
+    ISessionRepository Sessions { get; }
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }
     IStaffRepository Staff { get; }

@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Auth;
+using Domain.ValueObjects.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,8 +13,21 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("users");
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasColumnName("id");
-        builder.Property(u => u.Username).HasColumnName("username").HasMaxLength(50).IsRequired();
-        builder.Property(u => u.PasswordHash).HasColumnName("password_hash").HasMaxLength(255).IsRequired();
+        builder.Property(u => u.Username)
+            .HasConversion(
+                username => username.Value,
+                value => Username.Create(value))
+            .HasColumnName("username")
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(u => u.PasswordHash)
+            .HasConversion(
+                hash => hash.Value,
+                value => PasswordHash.Create(value))
+            .HasColumnName("password_hash")
+            .HasMaxLength(255)
+            .IsRequired();
         builder.Property(u => u.PersonId).HasColumnName("person_id");
         builder.Property(u => u.RoleId).HasColumnName("role_id");
         builder.Property(u => u.IsActive).HasColumnName("is_active");
