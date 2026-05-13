@@ -17,7 +17,9 @@ using Infrastructure.Repositories.Countries;
 using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
 using Infrastructure.Repositories.Fares;
+using Infrastructure.Repositories.FlightAssignments;
 using Infrastructure.Repositories.Flights;
+using Infrastructure.Repositories.FlightRoles;
 using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.FlightStatusTransitions;
 using Infrastructure.Repositories.People;
@@ -71,7 +73,9 @@ public class EfUnitOfWork : IUnitOfWork
     public IFareRepository? _fare;
     public IFlightStateRepository? _flightState;
     public IFlightStatusTransitionRepository? _flightStatusTransition;
+    public IFlightRoleRepository? _flightRole;
     public IFlightRepository? _flight;
+    public IFlightAssignmentRepository? _flightAssignment;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -513,6 +517,19 @@ public class EfUnitOfWork : IUnitOfWork
         }
     }
 
+    public IFlightRoleRepository FlightRoles
+    {
+        get
+        {
+            if (_flightRole == null)
+            {
+                _flightRole = new FlightRoleRepository(_contextdb);
+            }
+
+            return _flightRole;
+        }
+    }
+
     public IFlightRepository Flights
     {
         get
@@ -523,6 +540,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _flight;
+        }
+    }
+
+    public IFlightAssignmentRepository FlightAssignments
+    {
+        get
+        {
+            if (_flightAssignment == null)
+            {
+                _flightAssignment = new FlightAssignmentRepository(_contextdb);
+            }
+
+            return _flightAssignment;
         }
     }
 }
