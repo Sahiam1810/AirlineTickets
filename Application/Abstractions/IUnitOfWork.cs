@@ -44,6 +44,7 @@ public interface IUnitOfWork
     IFlightSeatRepository FlightSeats { get; }
     IReservationStatusRepository ReservationStatuses { get; }
     IReservationStatusTransitionRepository ReservationStatusTransitions { get; }
+    IReservationRepository Reservations { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

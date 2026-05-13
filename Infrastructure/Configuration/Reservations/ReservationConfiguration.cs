@@ -1,4 +1,5 @@
 using Domain.Entities.Reservations;
+using Domain.ValueObjects.Reservations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,22 +10,69 @@ public sealed class ReservationConfiguration : IEntityTypeConfiguration<Reservat
     public void Configure(EntityTypeBuilder<Reservation> builder)
     {
         builder.ToTable("reservations");
-        builder.HasKey(r => r.Id);
-        builder.Property(r => r.Id).HasColumnName("id");
-        builder.Property(r => r.ReservationCode).HasColumnName("reservation_code").HasMaxLength(30).IsRequired();
-        builder.Property(r => r.ClientId).HasColumnName("client_id");
-        builder.Property(r => r.ReservationDate).HasColumnName("reservation_date");
-        builder.Property(r => r.ReservationStatusId).HasColumnName("reservation_status_id");
-        builder.Property(r => r.TotalValue).HasColumnName("total_value").HasPrecision(18, 2);
-        builder.Property(r => r.ExpiresAt).HasColumnName("expires_at");
-        builder.Property(r => r.CreatedAt).HasColumnName("created_at");
-        builder.Property(r => r.UpdatedAt).HasColumnName("updated_at");
-        builder.HasIndex(r => r.ReservationCode).IsUnique();
+        builder.HasKey(c => c.Id);
+        builder.Property(c => c.Id).HasColumnName("id");
+        
+        builder.Property(c => c.ReservationCode)
+            .HasColumnName("reservation_code")
+            .HasMaxLength(30)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => ReservationCode.Create(v));
+                
+        builder.HasIndex(c => c.ReservationCode).IsUnique();
+
+        builder.Property(c => c.ClientId)
+            .HasColumnName("client_id")
+            .IsRequired();
+
+        builder.Property(c => c.ReservationDate)
+            .HasColumnName("reservation_date")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        builder.Property(c => c.ReservationStatusId)
+            .HasColumnName("reservation_status_id")
+            .IsRequired();
+
+        builder.Property(c => c.TotalValue)
+            .HasColumnName("total_value")
+            .HasPrecision(18, 2)
+            .IsRequired()
+            .HasConversion(
+                v => v.Value,
+                v => TotalValue.Create(v));
+
+        builder.ToTable(t => t.HasCheckConstraint("chk_valor_total", "total_value >= 0"));
+
+        builder.Property(c => c.ExpiresAt)
+            .HasColumnName("expires_at")
+            .IsRequired(false);
+
+        builder.Property(c => c.CreatedAt)
+            .HasColumnName("created_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        builder.Property(c => c.UpdatedAt)
+            .HasColumnName("updated_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
         builder.HasOne(r => r.Client)
             .WithMany()
-            .HasForeignKey(r => r.ClientId);
+            .HasForeignKey(r => r.ClientId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasOne(r => r.ReservationStatus)
             .WithMany(rs => rs.Reservations)
-            .HasForeignKey(r => r.ReservationStatusId);
+            .HasForeignKey(r => r.ReservationStatusId)
+            .OnDelete(DeleteBehavior.Restrict);
+            
+        builder.HasMany(r => r.ReservationFlights)
+            .WithOne(rf => rf.Reservation)
+            .HasForeignKey(rf => rf.ReservationId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
