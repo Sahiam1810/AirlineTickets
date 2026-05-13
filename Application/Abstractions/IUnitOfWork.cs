@@ -50,6 +50,7 @@ public interface IUnitOfWork
     ITicketStatusRepository TicketStatuses { get; }
     ITicketRepository Tickets { get; }
     ICheckInStatusRepository CheckInStatuses { get; }
+    ICheckInRepository CheckIns { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
