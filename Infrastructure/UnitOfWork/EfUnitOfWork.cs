@@ -18,6 +18,7 @@ using Infrastructure.Repositories.DocumentTypes;
 using Infrastructure.Repositories.EmailDomains;
 using Infrastructure.Repositories.Fares;
 using Infrastructure.Repositories.FlightStates;
+using Infrastructure.Repositories.FlightStatusTransitions;
 using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.PersonEmails;
@@ -68,6 +69,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ISeasonRepository? _season;
     public IFareRepository? _fare;
     public IFlightStateRepository? _flightState;
+    public IFlightStatusTransitionRepository? _flightStatusTransition;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -493,6 +495,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _flightState;
+        }
+    }
+
+    public IFlightStatusTransitionRepository FlightStatusTransitions
+    {
+        get
+        {
+            if (_flightStatusTransition == null)
+            {
+                _flightStatusTransition = new FlightStatusTransitionRepository(_contextdb);
+            }
+
+            return _flightStatusTransition;
         }
     }
 }

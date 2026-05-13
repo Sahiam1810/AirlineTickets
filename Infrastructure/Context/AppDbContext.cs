@@ -65,7 +65,7 @@ public sealed class AppDbContext : DbContext
 
     // Flights
     public DbSet<FlightState> FlightStates => Set<FlightState>();
-    public DbSet<FlightStatusTransition> FlightStatusTransitions { get; set; } = default!;
+    public DbSet<FlightStatusTransition> FlightStatusTransitions => Set<FlightStatusTransition>();
     public DbSet<Flight> Flights { get; set; } = default!;
     public DbSet<FlightRole> FlightRoles { get; set; } = default!;
     public DbSet<FlightAssignment> FlightAssignments { get; set; } = default!;
