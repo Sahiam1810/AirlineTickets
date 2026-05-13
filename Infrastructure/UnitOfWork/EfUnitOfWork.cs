@@ -10,6 +10,7 @@ using Infrastructure.Repositories.Airports;
 using Infrastructure.Repositories.AvailabilityStatuses;
 using Infrastructure.Repositories.CabinConfigurations;
 using Infrastructure.Repositories.CabinTypes;
+using Infrastructure.Repositories.CheckInStatuses;
 using Infrastructure.Repositories.Cities;
 using Infrastructure.Repositories.Clients;
 using Infrastructure.Repositories.Continents;
@@ -96,6 +97,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IReservationRepository? _reservation;
     public ITicketStatusRepository? _ticketStatus;
     public ITicketRepository? _ticket;
+    public ICheckInStatusRepository? _checkInStatus;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -703,6 +705,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _ticket;
+        }
+    }
+
+    public ICheckInStatusRepository CheckInStatuses
+    {
+        get
+        {
+            if (_checkInStatus == null)
+            {
+                _checkInStatus = new CheckInStatusRepository(_contextdb);
+            }
+
+            return _checkInStatus;
         }
     }
 }

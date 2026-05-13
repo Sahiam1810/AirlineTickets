@@ -1,4 +1,3 @@
-using System;
 using Domain.Entities.Tickets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,7 +11,22 @@ public sealed class CheckInStatusConfiguration : IEntityTypeConfiguration<CheckI
         builder.ToTable("checkinstatuses");
         builder.HasKey(cs => cs.Id);
         builder.Property(cs => cs.Id).HasColumnName("id");
-        builder.Property(cs => cs.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
+
+        builder.Property(cs => cs.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(cs => cs.CreatedAt)
+            .HasColumnName("created_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        builder.Property(cs => cs.UpdatedAt)
+            .HasColumnName("updated_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
         builder.HasIndex(cs => cs.Name).IsUnique();
     }
 }
