@@ -30,6 +30,7 @@ using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.InvoiceItemTypes;
+using Infrastructure.Repositories.InvoiceItems;
 using Infrastructure.Repositories.PersonEmails;
 using Infrastructure.Repositories.PersonPhones;
 using Infrastructure.Repositories.PhoneCodes;
@@ -104,6 +105,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ICheckInRepository? _checkIn;
     public IInvoiceRepository? _invoice;
     public IInvoiceItemTypeRepository? _invoiceItemType;
+    public IInvoiceItemRepository? _invoiceItem;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -763,6 +765,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _invoiceItemType;
+        }
+    }
+
+    public IInvoiceItemRepository InvoiceItems
+    {
+        get
+        {
+            if (_invoiceItem == null)
+            {
+                _invoiceItem = new InvoiceItemRepository(_contextdb);
+            }
+
+            return _invoiceItem;
         }
     }
 }

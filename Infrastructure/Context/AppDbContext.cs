@@ -94,6 +94,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Payment> Payments { get; set; } = default!;
     public DbSet<Invoice> Invoices => Set<Invoice>();
     public DbSet<InvoiceItemType> InvoiceItemTypes => Set<InvoiceItemType>();
+    public DbSet<InvoiceItem> InvoiceItems => Set<InvoiceItem>();
 
     // Auth
     public DbSet<SystemRole> SystemRoles { get; set; } = default!;

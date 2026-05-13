@@ -53,6 +53,7 @@ public interface IUnitOfWork
     ICheckInRepository CheckIns { get; }
     IInvoiceRepository Invoices { get; }
     IInvoiceItemTypeRepository InvoiceItemTypes { get; }
+    IInvoiceItemRepository InvoiceItems { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
