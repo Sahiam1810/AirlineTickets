@@ -32,6 +32,7 @@ using Infrastructure.Repositories.RoadTypes;
 using Infrastructure.Repositories.Routes;
 using Infrastructure.Repositories.RouteStops;
 using Infrastructure.Repositories.Seasons;
+using Infrastructure.Repositories.SeatLocationTypes;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
@@ -76,6 +77,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IFlightRoleRepository? _flightRole;
     public IFlightRepository? _flight;
     public IFlightAssignmentRepository? _flightAssignment;
+    public ISeatLocationTypeRepository? _seatLocationType;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -553,6 +555,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _flightAssignment;
+        }
+    }
+
+    public ISeatLocationTypeRepository SeatLocationTypes
+    {
+        get
+        {
+            if (_seatLocationType == null)
+            {
+                _seatLocationType = new SeatLocationTypeRepository(_contextdb);
+            }
+
+            return _seatLocationType;
         }
     }
 }
