@@ -1,11 +1,12 @@
 using System;
 using Domain.Common;
+using Domain.ValueObjects.Auth;
 
 namespace Domain.Entities.Auth;
 
 public sealed class Permission : BaseEntity<int>
 {
-    public string Name { get; private set; } = string.Empty;
+    public PermissionName Name { get; private set; } = null!;
     public string? Description { get; private set; }
 
     // Navigation
@@ -15,13 +16,14 @@ public sealed class Permission : BaseEntity<int>
 
     public Permission(string name, string? description)
     {
-        Name = name;
+        Name = PermissionName.Create(name);
         Description = description;
     }
 
     public void Update(string name, string? description)
     {
-        Name = name;
+        Name = PermissionName.Create(name);
         Description = description;
+        UpdatedAt = DateTime.UtcNow;
     }
 }

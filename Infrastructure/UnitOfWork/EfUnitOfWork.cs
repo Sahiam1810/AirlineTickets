@@ -54,6 +54,7 @@ using Infrastructure.Repositories.SeatLocationTypes;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
+using Infrastructure.Repositories.Auth;
 using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
 
@@ -86,6 +87,8 @@ public class EfUnitOfWork : IUnitOfWork
     public ICabinTypeRepository? _cabinType;
     public ICabinConfigurationRepository? _cabinConfiguration;
     public IStaffRoleRepository? _staffRole;
+    public ISystemRoleRepository? _systemRole;
+    public IPermissionRepository? _permission;
     public IAvailabilityStatusRepository? _availabilityStatus;
     public IStaffAvailabilityRepository? _staffAvailability;
     public IStaffRepository? _staff;
@@ -452,6 +455,32 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _staffRole;
+        }
+    }
+
+    public ISystemRoleRepository SystemRoles
+    {
+        get
+        {
+            if (_systemRole == null)
+            {
+                _systemRole = new SystemRoleRepository(_contextdb);
+            }
+
+            return _systemRole;
+        }
+    }
+
+    public IPermissionRepository Permissions
+    {
+        get
+        {
+            if (_permission == null)
+            {
+                _permission = new PermissionRepository(_contextdb);
+            }
+
+            return _permission;
         }
     }
 

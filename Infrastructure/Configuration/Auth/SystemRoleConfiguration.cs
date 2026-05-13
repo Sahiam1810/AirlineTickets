@@ -1,5 +1,6 @@
 using System;
 using Domain.Entities.Auth;
+using Domain.ValueObjects.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,8 +13,18 @@ public sealed class SystemRoleConfiguration : IEntityTypeConfiguration<SystemRol
         builder.ToTable("systemroles");
         builder.HasKey(sr => sr.Id);
         builder.Property(sr => sr.Id).HasColumnName("id");
-        builder.Property(sr => sr.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
-        builder.Property(sr => sr.Description).HasColumnName("description").HasMaxLength(150);
+        builder.Property(sr => sr.Name)
+            .HasConversion(
+                name => name.Value,
+                value => SystemRoleName.Create(value))
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(sr => sr.Description)
+            .HasColumnName("description")
+            .HasMaxLength(150);
+
         builder.HasIndex(sr => sr.Name).IsUnique();
     }
 }

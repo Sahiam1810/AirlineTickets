@@ -28,6 +28,8 @@ public interface IUnitOfWork
     ICabinTypeRepository CabinTypes { get; }
     ICabinConfigurationRepository CabinConfigurations { get; }
     IStaffRoleRepository StaffRoles { get; }
+    ISystemRoleRepository SystemRoles { get; }
+    IPermissionRepository Permissions { get; }
     IAvailabilityStatusRepository AvailabilityStatuses { get; }
     IStaffAvailabilityRepository StaffAvailabilities { get; }
     IStaffRepository Staff { get; }

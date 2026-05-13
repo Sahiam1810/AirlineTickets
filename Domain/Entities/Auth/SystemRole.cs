@@ -1,11 +1,12 @@
 using System;
 using Domain.Common;
+using Domain.ValueObjects.Auth;
 
 namespace Domain.Entities.Auth;
 
 public sealed class SystemRole : BaseEntity<int>
 {
-    public string Name { get; private set; } = string.Empty;
+    public SystemRoleName Name { get; private set; } = null!;
     public string? Description { get; private set; }
 
     // Navigation
@@ -16,13 +17,14 @@ public sealed class SystemRole : BaseEntity<int>
 
     public SystemRole(string name, string? description)
     {
-        Name = name;
+        Name = SystemRoleName.Create(name);
         Description = description;
     }
 
     public void Update(string name, string? description)
     {
-        Name = name;
+        Name = SystemRoleName.Create(name);
         Description = description;
+        UpdatedAt = DateTime.UtcNow;
     }
 }

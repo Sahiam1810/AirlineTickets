@@ -48,6 +48,7 @@ using Infrastructure.Repositories.SeatLocationTypes;
 using Infrastructure.Repositories.Staff;
 using Infrastructure.Repositories.StaffAvailabilities;
 using Infrastructure.Repositories.StaffRoles;
+using Infrastructure.Repositories.Auth;
 using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
 using Infrastructure.Repositories.InvoiceItemTypes;
@@ -113,6 +114,8 @@ builder.Services.AddScoped<ISeatLocationTypeRepository, SeatLocationTypeReposito
 builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 builder.Services.AddScoped<IStaffAvailabilityRepository, StaffAvailabilityRepository>();
 builder.Services.AddScoped<IStaffRoleRepository, StaffRoleRepository>();
+builder.Services.AddScoped<ISystemRoleRepository, SystemRoleRepository>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
