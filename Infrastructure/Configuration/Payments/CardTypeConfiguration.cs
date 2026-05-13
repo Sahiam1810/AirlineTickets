@@ -1,4 +1,3 @@
-using System;
 using Domain.Entities.Payments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,7 +11,12 @@ public sealed class CardTypeConfiguration : IEntityTypeConfiguration<CardType>
         builder.ToTable("cardtypes");
         builder.HasKey(ct => ct.Id);
         builder.Property(ct => ct.Id).HasColumnName("id");
-        builder.Property(ct => ct.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
-        builder.HasIndex(ct => ct.Name).IsUnique();
+        builder.Property(ct => ct.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.HasIndex(ct => ct.Name)
+            .IsUnique();
     }
 }

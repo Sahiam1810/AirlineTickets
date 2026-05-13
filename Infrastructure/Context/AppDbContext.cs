@@ -87,9 +87,9 @@ public sealed class AppDbContext : DbContext
 
     // Payments
     public DbSet<PaymentState> PaymentStates => Set<PaymentState>();
-    public DbSet<PaymentMethodType> PaymentMethodTypes { get; set; } = default!;
-    public DbSet<CardType> CardTypes { get; set; } = default!;
-    public DbSet<CardIssuer> CardIssuers { get; set; } = default!;
+    public DbSet<PaymentMethodType> PaymentMethodTypes => Set<PaymentMethodType>();
+    public DbSet<CardType> CardTypes => Set<CardType>();
+    public DbSet<CardIssuer> CardIssuers => Set<CardIssuer>();
     public DbSet<PaymentMethod> PaymentMethods { get; set; } = default!;
     public DbSet<Payment> Payments { get; set; } = default!;
     public DbSet<Invoice> Invoices => Set<Invoice>();

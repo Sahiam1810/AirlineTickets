@@ -10,6 +10,8 @@ using Infrastructure.Repositories.Airports;
 using Infrastructure.Repositories.AvailabilityStatuses;
 using Infrastructure.Repositories.CabinConfigurations;
 using Infrastructure.Repositories.CabinTypes;
+using Infrastructure.Repositories.CardIssuers;
+using Infrastructure.Repositories.CardTypes;
 using Infrastructure.Repositories.CheckIns;
 using Infrastructure.Repositories.CheckInStatuses;
 using Infrastructure.Repositories.Cities;
@@ -31,6 +33,7 @@ using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.InvoiceItemTypes;
 using Infrastructure.Repositories.InvoiceItems;
+using Infrastructure.Repositories.PaymentMethodTypes;
 using Infrastructure.Repositories.PaymentStates;
 using Infrastructure.Repositories.PersonEmails;
 using Infrastructure.Repositories.PersonPhones;
@@ -108,6 +111,9 @@ public class EfUnitOfWork : IUnitOfWork
     public IInvoiceItemTypeRepository? _invoiceItemType;
     public IInvoiceItemRepository? _invoiceItem;
     public IPaymentStateRepository? _paymentState;
+    public IPaymentMethodTypeRepository? _paymentMethodType;
+    public ICardTypeRepository? _cardType;
+    public ICardIssuerRepository? _cardIssuer;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -793,6 +799,45 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _paymentState;
+        }
+    }
+
+    public IPaymentMethodTypeRepository PaymentMethodTypes
+    {
+        get
+        {
+            if (_paymentMethodType == null)
+            {
+                _paymentMethodType = new PaymentMethodTypeRepository(_contextdb);
+            }
+
+            return _paymentMethodType;
+        }
+    }
+
+    public ICardTypeRepository CardTypes
+    {
+        get
+        {
+            if (_cardType == null)
+            {
+                _cardType = new CardTypeRepository(_contextdb);
+            }
+
+            return _cardType;
+        }
+    }
+
+    public ICardIssuerRepository CardIssuers
+    {
+        get
+        {
+            if (_cardIssuer == null)
+            {
+                _cardIssuer = new CardIssuerRepository(_contextdb);
+            }
+
+            return _cardIssuer;
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Domain.Entities.Payments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,7 +11,12 @@ public sealed class PaymentMethodTypeConfiguration : IEntityTypeConfiguration<Pa
         builder.ToTable("paymentmethodtypes");
         builder.HasKey(pmt => pmt.Id);
         builder.Property(pmt => pmt.Id).HasColumnName("id");
-        builder.Property(pmt => pmt.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
-        builder.HasIndex(pmt => pmt.Name).IsUnique();
+        builder.Property(pmt => pmt.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.HasIndex(pmt => pmt.Name)
+            .IsUnique();
     }
 }

@@ -12,6 +12,8 @@ using Infrastructure.Repositories.Airports;
 using Infrastructure.Repositories.AvailabilityStatuses;
 using Infrastructure.Repositories.CabinConfigurations;
 using Infrastructure.Repositories.CabinTypes;
+using Infrastructure.Repositories.CardIssuers;
+using Infrastructure.Repositories.CardTypes;
 using Infrastructure.Repositories.CheckIns;
 using Infrastructure.Repositories.CheckInStatuses;
 using Infrastructure.Repositories.Cities;
@@ -50,6 +52,7 @@ using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
 using Infrastructure.Repositories.InvoiceItemTypes;
 using Infrastructure.Repositories.InvoiceItems;
+using Infrastructure.Repositories.PaymentMethodTypes;
 using Infrastructure.Repositories.PaymentStates;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -114,6 +117,9 @@ builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInvoiceItemTypeRepository, InvoiceItemTypeRepository>();
 builder.Services.AddScoped<IInvoiceItemRepository, InvoiceItemRepository>();
 builder.Services.AddScoped<IPaymentStateRepository, PaymentStateRepository>();
+builder.Services.AddScoped<IPaymentMethodTypeRepository, PaymentMethodTypeRepository>();
+builder.Services.AddScoped<ICardTypeRepository, CardTypeRepository>();
+builder.Services.AddScoped<ICardIssuerRepository, CardIssuerRepository>();
 
 var app = builder.Build();
 

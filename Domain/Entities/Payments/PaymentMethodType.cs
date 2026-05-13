@@ -7,19 +7,33 @@ public sealed class PaymentMethodType : BaseEntity<int>
 {
     public string Name { get; private set; } = string.Empty;
 
-    // Navigation
     public ICollection<PaymentMethod> PaymentMethods { get; set; } = [];
 
     private PaymentMethodType() { }
 
     public PaymentMethodType(string name)
-
     {
-        Name = name;
+        ValidateAndSetName(name);
     }
 
     public void Update(string name)
     {
-        Name = name;
+        ValidateAndSetName(name);
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    private void ValidateAndSetName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name cannot be null or empty.");
+        }
+
+        if (name.Length > 50)
+        {
+            throw new ArgumentException("Name cannot exceed 50 characters.");
+        }
+
+        Name = name.Trim();
     }
 }
