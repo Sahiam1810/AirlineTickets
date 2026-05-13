@@ -92,6 +92,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<CardIssuer> CardIssuers { get; set; } = default!;
     public DbSet<PaymentMethod> PaymentMethods { get; set; } = default!;
     public DbSet<Payment> Payments { get; set; } = default!;
+    public DbSet<Invoice> Invoices => Set<Invoice>();
     public DbSet<InvoiceItemType> InvoiceItemTypes => Set<InvoiceItemType>();
 
     // Auth

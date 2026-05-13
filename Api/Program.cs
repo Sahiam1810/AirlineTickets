@@ -25,6 +25,7 @@ using Infrastructure.Repositories.FlightRoles;
 using Infrastructure.Repositories.FlightSeats;
 using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.FlightStatusTransitions;
+using Infrastructure.Repositories.Invoices;
 using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.People;
@@ -107,6 +108,7 @@ builder.Services.AddScoped<IStaffAvailabilityRepository, StaffAvailabilityReposi
 builder.Services.AddScoped<IStaffRoleRepository, StaffRoleRepository>();
 builder.Services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInvoiceItemTypeRepository, InvoiceItemTypeRepository>();
 
 var app = builder.Build();

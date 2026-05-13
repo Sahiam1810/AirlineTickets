@@ -25,6 +25,7 @@ using Infrastructure.Repositories.FlightRoles;
 using Infrastructure.Repositories.FlightSeats;
 using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.FlightStatusTransitions;
+using Infrastructure.Repositories.Invoices;
 using Infrastructure.Repositories.People;
 using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
@@ -101,6 +102,7 @@ public class EfUnitOfWork : IUnitOfWork
     public ITicketRepository? _ticket;
     public ICheckInStatusRepository? _checkInStatus;
     public ICheckInRepository? _checkIn;
+    public IInvoiceRepository? _invoice;
     public IInvoiceItemTypeRepository? _invoiceItemType;
 
     public EfUnitOfWork(AppDbContext db)
@@ -735,6 +737,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _checkIn;
+        }
+    }
+
+    public IInvoiceRepository Invoices
+    {
+        get
+        {
+            if (_invoice == null)
+            {
+                _invoice = new InvoiceRepository(_contextdb);
+            }
+
+            return _invoice;
         }
     }
 
