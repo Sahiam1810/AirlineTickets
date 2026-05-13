@@ -36,6 +36,7 @@ public interface IUnitOfWork
     IFareRepository Fares { get; }
     IFlightStateRepository FlightStates { get; }
     IFlightStatusTransitionRepository FlightStatusTransitions { get; }
+    IFlightRepository Flights { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
