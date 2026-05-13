@@ -8,10 +8,26 @@ public sealed class PaymentStateConfiguration : IEntityTypeConfiguration<Payment
 {
     public void Configure(EntityTypeBuilder<PaymentState> builder)
     {
-        builder.ToTable("paymentstates");
+        builder.ToTable("payment_states");
+        
         builder.HasKey(ps => ps.Id);
         builder.Property(ps => ps.Id).HasColumnName("id");
-        builder.Property(ps => ps.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
+        
+        builder.Property(ps => ps.Name)
+            .HasColumnName("name")
+            .HasMaxLength(50)
+            .IsRequired();
+            
         builder.HasIndex(ps => ps.Name).IsUnique();
+
+        builder.Property(ps => ps.CreatedAt)
+            .HasColumnName("created_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        builder.Property(ps => ps.UpdatedAt)
+            .HasColumnName("updated_at")
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
     }
 }

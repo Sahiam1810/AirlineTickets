@@ -50,6 +50,7 @@ using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
 using Infrastructure.Repositories.InvoiceItemTypes;
 using Infrastructure.Repositories.InvoiceItems;
+using Infrastructure.Repositories.PaymentStates;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -112,6 +113,7 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInvoiceItemTypeRepository, InvoiceItemTypeRepository>();
 builder.Services.AddScoped<IInvoiceItemRepository, InvoiceItemRepository>();
+builder.Services.AddScoped<IPaymentStateRepository, PaymentStateRepository>();
 
 var app = builder.Build();
 

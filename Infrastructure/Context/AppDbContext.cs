@@ -86,7 +86,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<CheckIn> CheckIns => Set<CheckIn>();
 
     // Payments
-    public DbSet<PaymentState> PaymentStates { get; set; } = default!;
+    public DbSet<PaymentState> PaymentStates => Set<PaymentState>();
     public DbSet<PaymentMethodType> PaymentMethodTypes { get; set; } = default!;
     public DbSet<CardType> CardTypes { get; set; } = default!;
     public DbSet<CardIssuer> CardIssuers { get; set; } = default!;
