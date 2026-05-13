@@ -1,7 +1,9 @@
 using System;
 using Domain.Common;
 using Domain.Entities.Airlines;
+using Domain.Entities.Flights;
 using Domain.Entities.People;
+using Domain.Entities.Tickets;
 using Domain.ValueObjects.Staff;
 
 namespace Domain.Entities.Staff;
@@ -62,4 +64,6 @@ public sealed class StaffMember : BaseEntity<int>
     public Airline? Airline { get; set; }
     public Airport? Airport { get; set; }
     public ICollection<StaffAvailability> Availabilities { get; set; } = [];
+    public ICollection<FlightAssignment> FlightAssignments { get; set; } = [];
+    public ICollection<CheckIn> CheckIns { get; set; } = [];
 }

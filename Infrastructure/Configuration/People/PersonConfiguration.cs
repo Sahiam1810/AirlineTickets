@@ -41,7 +41,7 @@ public sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at");
         builder.HasIndex(p => new { p.DocumentTypeId, p.DocumentNumber }).IsUnique();
         builder.HasOne(p => p.DocumentType)
-            .WithMany()
+            .WithMany(dt => dt.People)
             .HasForeignKey(p => p.DocumentTypeId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(p => p.Address)

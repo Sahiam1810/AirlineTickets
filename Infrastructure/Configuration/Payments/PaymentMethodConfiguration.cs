@@ -20,15 +20,15 @@ public sealed class PaymentMethodConfiguration : IEntityTypeConfiguration<Paymen
         builder.Property(pm => pm.UpdatedAt).HasColumnName("updated_at").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
         builder.HasIndex(pm => pm.CommercialName).IsUnique();
         builder.HasOne(pm => pm.PaymentMethodType)
-            .WithMany()
+            .WithMany(pmt => pmt.PaymentMethods)
             .HasForeignKey(pm => pm.PaymentMethodTypeId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(pm => pm.CardType)
-            .WithMany()
+            .WithMany(ct => ct.PaymentMethods)
             .HasForeignKey(pm => pm.CardTypeId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(pm => pm.CardIssuer)
-            .WithMany()
+            .WithMany(ci => ci.PaymentMethods)
             .HasForeignKey(pm => pm.CardIssuerId)
             .OnDelete(DeleteBehavior.Restrict);
     }

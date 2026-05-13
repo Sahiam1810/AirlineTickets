@@ -37,11 +37,11 @@ public sealed class AddressConfiguration : IEntityTypeConfiguration<Address>
             .HasMaxLength(20)
             .HasConversion(v => v == null ? null : v.Value, v => PostalCode.Create(v));
         builder.HasOne(a => a.RoadType)
-            .WithMany()
+            .WithMany(rt => rt.Addresses)
             .HasForeignKey(a => a.RoadTypeId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(a => a.City)
-            .WithMany()
+            .WithMany(c => c.Addresses)
             .HasForeignKey(a => a.CityId)
             .OnDelete(DeleteBehavior.Restrict);
     }

@@ -26,11 +26,11 @@ public sealed class AirportAirlineConfiguration : IEntityTypeConfiguration<Airpo
         builder.Property(aa => aa.IsActive).HasColumnName("is_active").IsRequired();
         builder.HasIndex(aa => new { aa.AirportId, aa.AirlineId }).IsUnique();
         builder.HasOne(aa => aa.Airport)
-            .WithMany()
+            .WithMany(a => a.AirportAirlines)
             .HasForeignKey(aa => aa.AirportId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(aa => aa.Airline)
-            .WithMany()
+            .WithMany(al => al.AirportAirlines)
             .HasForeignKey(aa => aa.AirlineId)
             .OnDelete(DeleteBehavior.Restrict);
     }

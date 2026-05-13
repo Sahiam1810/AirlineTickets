@@ -21,15 +21,15 @@ public sealed class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at");
         builder.ToTable(t => t.HasCheckConstraint("chk_payment_amount", "amount >= 0"));
         builder.HasOne(p => p.Reservation)
-            .WithMany()
+            .WithMany(r => r.Payments)
             .HasForeignKey(p => p.ReservationId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(p => p.PaymentState)
-            .WithMany()
+            .WithMany(ps => ps.Payments)
             .HasForeignKey(p => p.PaymentStateId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(p => p.PaymentMethod)
-            .WithMany()
+            .WithMany(pm => pm.Payments)
             .HasForeignKey(p => p.PaymentMethodId)
             .OnDelete(DeleteBehavior.Restrict);
     }

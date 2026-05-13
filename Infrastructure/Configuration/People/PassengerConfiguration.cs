@@ -17,12 +17,12 @@ public sealed class PassengerConfiguration : IEntityTypeConfiguration<Passenger>
         builder.HasIndex(p => p.PersonId).IsUnique();
 
         builder.HasOne(p => p.Person)
-            .WithMany()
+            .WithMany(per => per.Passengers)
             .HasForeignKey(p => p.PersonId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(p => p.PassengerType)
-            .WithMany()
+            .WithMany(pt => pt.Passengers)
             .HasForeignKey(p => p.PassengerTypeId)
             .OnDelete(DeleteBehavior.Restrict);
     }

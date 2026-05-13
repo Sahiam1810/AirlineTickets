@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Domain.Common;
+using Domain.Entities.Payments;
 using Domain.Entities.People;
 using Domain.ValueObjects.Reservations;
 
@@ -18,6 +19,7 @@ public sealed class Reservation : BaseEntity<int>
     public Client Client { get; set; } = null!;
     public ReservationStatus ReservationStatus { get; set; } = null!;
     public ICollection<ReservationFlight> ReservationFlights { get; set; } = new List<ReservationFlight>();
+    public ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     private Reservation() { }
 

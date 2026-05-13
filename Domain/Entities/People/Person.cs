@@ -19,6 +19,7 @@ public sealed class Person : BaseEntity<int>
     public Address? Address { get; set; }
     public ICollection<PersonEmail> Emails { get; set; } = [];
     public ICollection<PersonPhone> Phones { get; set; } = [];
+    public ICollection<Passenger> Passengers { get; set; } = [];
 
     private Person() { }
 

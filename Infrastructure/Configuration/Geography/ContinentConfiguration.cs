@@ -19,8 +19,6 @@ public sealed class ContinentConfiguration : IEntityTypeConfiguration<Continent>
             .HasConversion(
                 v => v.Value,
                 v => ContinentName.Create(v));
-        builder.HasIndex(c => c.Name).IsUnique();
-
-        
+        builder.HasIndex(c => c.Name).IsUnique();        
     }
 }

@@ -22,7 +22,7 @@ public sealed class FlightState : BaseEntity<int>
     }
 
     // Navigation
-    public ICollection<FlightStatusTransition> OriginTransitions { get; set; } = [];
-    public ICollection<FlightStatusTransition> DestinationTransitions { get; set; } = [];
     public ICollection<Flight> Flights { get; set; } = [];
+    public ICollection<FlightStatusTransition> FromTransitions { get; set; } = [];
+    public ICollection<FlightStatusTransition> ToTransitions { get; set; } = [];
 }

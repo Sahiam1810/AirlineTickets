@@ -1,4 +1,5 @@
 using Domain.Common;
+using Domain.Entities.Location;
 using Domain.ValueObjects.Geography;
 
 namespace Domain.Entities.Geography;
@@ -9,6 +10,7 @@ public sealed class City : BaseEntity<int>
     public int RegionId { get; private set; }
 
     public Region Region { get; set; } = null!;
+    public ICollection<Address> Addresses { get; set; } = [];
 
     private City() { }
 

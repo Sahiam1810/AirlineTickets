@@ -18,17 +18,17 @@ public sealed class FlightAssignmentConfiguration : IEntityTypeConfiguration<Fli
         builder.HasIndex(fa => new { fa.FlightId, fa.StaffId }).IsUnique();
 
         builder.HasOne(fa => fa.Flight)
-            .WithMany()
+            .WithMany(f => f.FlightAssignments)
             .HasForeignKey(fa => fa.FlightId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(fa => fa.Staff)
-            .WithMany()
+            .WithMany(s => s.FlightAssignments)
             .HasForeignKey(fa => fa.StaffId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(fa => fa.FlightRole)
-            .WithMany()
+            .WithMany(fr => fr.FlightAssignments)
             .HasForeignKey(fa => fa.FlightRoleId)
             .OnDelete(DeleteBehavior.Restrict);
     }

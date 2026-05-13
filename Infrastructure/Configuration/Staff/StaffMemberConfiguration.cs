@@ -32,15 +32,15 @@ public sealed class StaffMemberConfiguration : IEntityTypeConfiguration<StaffMem
             .HasForeignKey<StaffMember>(s => s.PersonId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(s => s.StaffRole)
-            .WithMany()
+            .WithMany(sr => sr.StaffMembers)
             .HasForeignKey(s => s.StaffRoleId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(s => s.Airline)
-            .WithMany()
+            .WithMany(al => al.StaffMembers)
             .HasForeignKey(s => s.AirlineId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(s => s.Airport)
-            .WithMany()
+            .WithMany(a => a.StaffMembers)
             .HasForeignKey(s => s.AirportId)
             .OnDelete(DeleteBehavior.Restrict);
     }

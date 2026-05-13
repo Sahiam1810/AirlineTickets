@@ -1,5 +1,6 @@
 using System;
 using Domain.Common;
+using Domain.Entities.Flights;
 using Domain.ValueObjects.Aircraft;
 
 namespace Domain.Entities.Aircraft;
@@ -23,4 +24,5 @@ public sealed class CabinType : BaseEntity<int>
 
     // Navigation
     public ICollection<CabinConfiguration> CabinConfigurations { get; set; } = [];
+    public ICollection<FlightSeat> FlightSeats { get; set; } = [];
 }

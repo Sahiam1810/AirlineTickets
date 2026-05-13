@@ -1,5 +1,7 @@
 using Domain.Common;
 using Domain.Entities.Geography;
+using Domain.Entities.Routes;
+using Domain.Entities.Staff;
 using Domain.ValueObjects.Airports;
 
 namespace Domain.Entities.Airlines;
@@ -39,4 +41,6 @@ public sealed class Airport : BaseEntity<int>
     // Navigation
     public City City { get; set; } = null!;
     public ICollection<AirportAirline> AirportAirlines { get; set; } = [];
+    public ICollection<StaffMember> StaffMembers { get; set; } = [];
+    public ICollection<RouteStop> RouteStops { get; set; } = [];
 }

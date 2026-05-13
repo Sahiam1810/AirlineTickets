@@ -68,7 +68,7 @@ public sealed class CheckInConfiguration : IEntityTypeConfiguration<CheckIn>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(ci => ci.Staff)
-            .WithMany()
+            .WithMany(s => s.CheckIns)
             .HasForeignKey(ci => ci.StaffId)
             .OnDelete(DeleteBehavior.Restrict);
 
@@ -78,7 +78,7 @@ public sealed class CheckInConfiguration : IEntityTypeConfiguration<CheckIn>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(ci => ci.CheckInStatus)
-            .WithMany()
+            .WithMany(cis => cis.CheckIns)
             .HasForeignKey(ci => ci.CheckInStatusId)
             .OnDelete(DeleteBehavior.Restrict);
     }

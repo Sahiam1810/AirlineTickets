@@ -34,11 +34,11 @@ public sealed class AircraftUnitConfiguration : IEntityTypeConfiguration<Aircraf
         builder.Property(a => a.IsActive).HasColumnName("is_active").IsRequired();
         builder.HasIndex(a => a.Registration).IsUnique();
         builder.HasOne(a => a.AircraftModel)
-            .WithMany()
+            .WithMany( am => am.AircraftUnits)
             .HasForeignKey(a => a.AircraftModelId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(a => a.Airline)
-            .WithMany()
+            .WithMany(al => al.AircraftUnits)
             .HasForeignKey(a => a.AirlineId)
             .OnDelete(DeleteBehavior.Restrict);
     }

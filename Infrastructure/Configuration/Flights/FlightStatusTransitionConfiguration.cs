@@ -16,11 +16,11 @@ public sealed class FlightStatusTransitionConfiguration : IEntityTypeConfigurati
         builder.Property(fst => fst.ToStateId).HasColumnName("to_state_id");
         builder.HasIndex(fst => new { fst.FromStateId, fst.ToStateId }).IsUnique();
         builder.HasOne(fst => fst.FromState)
-            .WithMany()
+            .WithMany(fs => fs.FromTransitions)
             .HasForeignKey(fst => fst.FromStateId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(fst => fst.ToState)
-            .WithMany()
+            .WithMany( fs => fs.ToTransitions)
             .HasForeignKey(fst => fst.ToStateId)
             .OnDelete(DeleteBehavior.Restrict);
     }

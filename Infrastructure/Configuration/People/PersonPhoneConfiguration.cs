@@ -24,11 +24,11 @@ public sealed class PersonPhoneConfiguration : IEntityTypeConfiguration<PersonPh
                 v => PhoneNumber.Create(v));
         builder.Property(pp => pp.IsPrimary).HasColumnName("is_primary").IsRequired();
         builder.HasOne(pp => pp.Person)
-            .WithMany()
+            .WithMany(p => p.Phones)
             .HasForeignKey(pp => pp.PersonId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(pp => pp.PhoneCode)
-            .WithMany()
+            .WithMany(pc => pc.PersonPhones)
             .HasForeignKey(pp => pp.PhoneCodeId)
             .OnDelete(DeleteBehavior.Restrict);
     }

@@ -24,11 +24,11 @@ public sealed class PersonEmailConfiguration : IEntityTypeConfiguration<PersonEm
         builder.Property(pe => pe.EmailDomainId).HasColumnName("email_domain_id");
         builder.Property(pe => pe.IsPrimary).HasColumnName("is_primary").IsRequired();
         builder.HasOne(pe => pe.Person)
-            .WithMany()
+            .WithMany(p => p.Emails)
             .HasForeignKey(pe => pe.PersonId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(pe => pe.EmailDomain)
-            .WithMany()
+            .WithMany(ed => ed.PersonEmails)
             .HasForeignKey(pe => pe.EmailDomainId)
             .OnDelete(DeleteBehavior.Restrict);
     }

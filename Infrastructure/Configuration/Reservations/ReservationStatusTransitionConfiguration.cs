@@ -17,12 +17,12 @@ public sealed class ReservationStatusTransitionConfiguration : IEntityTypeConfig
         builder.HasIndex(rst => new { rst.FromStatusId, rst.ToStatusId }).IsUnique();
 
         builder.HasOne(rst => rst.FromStatus)
-            .WithMany()
+            .WithMany(rs => rs.FromTransitions)
             .HasForeignKey(rst => rst.FromStatusId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(rst => rst.ToStatus)
-            .WithMany()
+            .WithMany(rs => rs.ToTransitions)
             .HasForeignKey(rst => rst.ToStatusId)
             .OnDelete(DeleteBehavior.Restrict);
     }

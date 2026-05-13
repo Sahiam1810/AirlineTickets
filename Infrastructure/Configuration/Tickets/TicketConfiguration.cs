@@ -48,7 +48,7 @@ public sealed class TicketConfiguration : IEntityTypeConfiguration<Ticket>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(t => t.TicketStatus)
-            .WithMany()
+            .WithMany(ts => ts.Tickets)
             .HasForeignKey(t => t.TicketStatusId)
             .OnDelete(DeleteBehavior.Restrict);
     }

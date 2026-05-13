@@ -29,11 +29,11 @@ public sealed class RouteStopConfiguration : IEntityTypeConfiguration<RouteStop>
                 v => StopDurationMinutes.Create(v));
         builder.HasIndex(rs => new { rs.RouteId, rs.Order }).IsUnique();
         builder.HasOne(rs => rs.Route)
-            .WithMany()
+            .WithMany(r => r.RouteStops)
             .HasForeignKey(rs => rs.RouteId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(rs => rs.StopAirport)
-            .WithMany()
+            .WithMany(a => a.RouteStops)
             .HasForeignKey(rs => rs.StopAirportId)
             .OnDelete(DeleteBehavior.Restrict);
     }

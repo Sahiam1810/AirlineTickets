@@ -27,7 +27,7 @@ public sealed class RegionConfiguration : IEntityTypeConfiguration<Region>
             .IsRequired();
         builder.HasIndex(r => new { r.Name, r.CountryId }).IsUnique();
         builder.HasOne(r => r.Country)
-            .WithMany()
+            .WithMany(c => c.Regions)
             .HasForeignKey(r => r.CountryId)
             .OnDelete(DeleteBehavior.Restrict);
     }

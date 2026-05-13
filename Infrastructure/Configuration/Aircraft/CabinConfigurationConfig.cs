@@ -42,11 +42,11 @@ public sealed class CabinConfigurationConfiguration : IEntityTypeConfiguration<C
                 v => SeatLetters.Create(v));
         builder.HasIndex(cc => new { cc.AircraftId, cc.CabinTypeId }).IsUnique();
         builder.HasOne(cc => cc.Aircraft)
-            .WithMany()
+            .WithMany(a => a.CabinConfigurations)
             .HasForeignKey(cc => cc.AircraftId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(cc => cc.CabinType)
-            .WithMany()
+            .WithMany(ct => ct.CabinConfigurations)
             .HasForeignKey(cc => cc.CabinTypeId)
             .OnDelete(DeleteBehavior.Restrict);
     }

@@ -22,7 +22,7 @@ public sealed class CityConfiguration : IEntityTypeConfiguration<City>
             .IsRequired();
         builder.HasIndex(c => new { c.Name, c.RegionId }).IsUnique();
         builder.HasOne(c => c.Region)
-            .WithMany()
+            .WithMany(r => r.Cities)
             .HasForeignKey(c => c.RegionId)
             .OnDelete(DeleteBehavior.Restrict);
     }

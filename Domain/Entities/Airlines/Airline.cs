@@ -1,5 +1,7 @@
 using Domain.Common;
+using Domain.Entities.Aircraft;
 using Domain.Entities.Geography;
+using Domain.Entities.Staff;
 using Domain.ValueObjects.Airlines;
 
 namespace Domain.Entities.Airlines;
@@ -39,4 +41,6 @@ public sealed class Airline : BaseEntity<int>
     // Navigation
     public Country Country { get; set; } = null!;
     public ICollection<AirportAirline> AirportAirlines { get; set; } = [];
+    public ICollection<AircraftUnit> AircraftUnits { get; set; } = [];
+    public ICollection<StaffMember> StaffMembers { get; set; } = [];
 }

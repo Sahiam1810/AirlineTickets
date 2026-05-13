@@ -32,17 +32,17 @@ public sealed class FlightSeatConfiguration : IEntityTypeConfiguration<FlightSea
         builder.HasIndex(fs => new { fs.FlightId, fs.SeatCode }).IsUnique();
 
         builder.HasOne(fs => fs.Flight)
-            .WithMany()
+            .WithMany(f => f.FlightSeats)
             .HasForeignKey(fs => fs.FlightId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(fs => fs.CabinType)
-            .WithMany()
+            .WithMany(ct => ct.FlightSeats)
             .HasForeignKey(fs => fs.CabinTypeId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(fs => fs.SeatLocationType)
-            .WithMany()
+            .WithMany(slt => slt.FlightSeats)
             .HasForeignKey(fs => fs.SeatLocationTypeId)
             .OnDelete(DeleteBehavior.Restrict);
     }

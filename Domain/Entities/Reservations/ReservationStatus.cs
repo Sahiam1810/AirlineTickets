@@ -22,7 +22,7 @@ public sealed class ReservationStatus : BaseEntity<int>
     }
 
     // Navigation
-    public ICollection<ReservationStatusTransition> OriginTransitions { get; set; } = [];
-    public ICollection<ReservationStatusTransition> DestinationTransitions { get; set; } = [];
+    public ICollection<ReservationStatusTransition> FromTransitions { get; set; } = [];
+    public ICollection<ReservationStatusTransition> ToTransitions { get; set; } = [];
     public ICollection<Reservation> Reservations { get; set; } = [];
 }
