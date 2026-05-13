@@ -15,11 +15,15 @@ public sealed class PassengerConfiguration : IEntityTypeConfiguration<Passenger>
         builder.Property(p => p.PersonId).HasColumnName("person_id");
         builder.Property(p => p.PassengerTypeId).HasColumnName("passenger_type_id");
         builder.HasIndex(p => p.PersonId).IsUnique();
+
         builder.HasOne(p => p.Person)
             .WithMany()
-            .HasForeignKey(p => p.PersonId);
+            .HasForeignKey(p => p.PersonId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.HasOne(p => p.PassengerType)
-            .WithMany(pt => pt.Passengers)
-            .HasForeignKey(p => p.PassengerTypeId);
+            .WithMany()
+            .HasForeignKey(p => p.PassengerTypeId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

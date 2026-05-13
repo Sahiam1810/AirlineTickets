@@ -24,6 +24,7 @@ using Infrastructure.Repositories.FlightSeats;
 using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.FlightStatusTransitions;
 using Infrastructure.Repositories.People;
+using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.PersonEmails;
 using Infrastructure.Repositories.PersonPhones;
@@ -57,6 +58,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IPersonPhoneRepository? _personPhone;
     public IClientRepository? _client;
     public IPassengerTypeRepository? _passengerType;
+    public IPassengerRepository? _passenger;
     public IAirlineRepository? _airline;
     public IAirportRepository? _airport;
     public IAirportAirlineRepository? _airportAirline;
@@ -284,6 +286,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _passengerType;
+        }
+    }
+
+    public IPassengerRepository Passengers
+    {
+        get
+        {
+            if (_passenger == null)
+            {
+                _passenger = new PassengerRepository(_contextdb);
+            }
+
+            return _passenger;
         }
     }
 
