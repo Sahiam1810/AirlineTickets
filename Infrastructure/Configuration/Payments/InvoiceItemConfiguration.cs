@@ -54,7 +54,7 @@ public sealed class InvoiceItemConfiguration : IEntityTypeConfiguration<InvoiceI
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.HasOne(i => i.Invoice)
-            .WithMany(i => i.InvoiceItems)
+            .WithMany()
             .HasForeignKey(i => i.InvoiceId)
             .OnDelete(DeleteBehavior.Cascade);
 

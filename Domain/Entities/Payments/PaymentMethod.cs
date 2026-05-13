@@ -20,17 +20,55 @@ public sealed class PaymentMethod : BaseEntity<int>
 
     public PaymentMethod(int paymentMethodTypeId, int? cardTypeId, int? cardIssuerId, string commercialName)
     {
+        Validate(paymentMethodTypeId, cardTypeId, cardIssuerId, commercialName);
+
         PaymentMethodTypeId = paymentMethodTypeId;
         CardTypeId = cardTypeId;
         CardIssuerId = cardIssuerId;
-        CommercialName = commercialName;
+        CommercialName = commercialName.Trim();
     }
 
     public void Update(int paymentMethodTypeId, int? cardTypeId, int? cardIssuerId, string commercialName)
     {
+        Validate(paymentMethodTypeId, cardTypeId, cardIssuerId, commercialName);
+
         PaymentMethodTypeId = paymentMethodTypeId;
         CardTypeId = cardTypeId;
         CardIssuerId = cardIssuerId;
-        CommercialName = commercialName;
+        CommercialName = commercialName.Trim();
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    private static void Validate(int paymentMethodTypeId, int? cardTypeId, int? cardIssuerId, string commercialName)
+    {
+        if (paymentMethodTypeId <= 0)
+        {
+            throw new ArgumentException("Payment method type id must be greater than zero.");
+        }
+
+        if (string.IsNullOrWhiteSpace(commercialName))
+        {
+            throw new ArgumentException("Commercial name cannot be null or empty.");
+        }
+
+        if (commercialName.Trim().Length > 50)
+        {
+            throw new ArgumentException("Commercial name cannot exceed 50 characters.");
+        }
+
+        if (cardTypeId.HasValue && cardTypeId.Value <= 0)
+        {
+            throw new ArgumentException("Card type id must be greater than zero.");
+        }
+
+        if (cardIssuerId.HasValue && cardIssuerId.Value <= 0)
+        {
+            throw new ArgumentException("Card issuer id must be greater than zero.");
+        }
+
+        if (cardTypeId.HasValue != cardIssuerId.HasValue)
+        {
+            throw new ArgumentException("Card type and card issuer must be provided together.");
+        }
     }
 }

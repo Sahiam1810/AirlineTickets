@@ -33,6 +33,8 @@ using Infrastructure.Repositories.Passengers;
 using Infrastructure.Repositories.PassengerTypes;
 using Infrastructure.Repositories.InvoiceItemTypes;
 using Infrastructure.Repositories.InvoiceItems;
+using Infrastructure.Repositories.PaymentMethods;
+using Infrastructure.Repositories.Payments;
 using Infrastructure.Repositories.PaymentMethodTypes;
 using Infrastructure.Repositories.PaymentStates;
 using Infrastructure.Repositories.PersonEmails;
@@ -114,6 +116,8 @@ public class EfUnitOfWork : IUnitOfWork
     public IPaymentMethodTypeRepository? _paymentMethodType;
     public ICardTypeRepository? _cardType;
     public ICardIssuerRepository? _cardIssuer;
+    public IPaymentMethodRepository? _paymentMethod;
+    public IPaymentRepository? _payment;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -838,6 +842,32 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _cardIssuer;
+        }
+    }
+
+    public IPaymentMethodRepository PaymentMethods
+    {
+        get
+        {
+            if (_paymentMethod == null)
+            {
+                _paymentMethod = new PaymentMethodRepository(_contextdb);
+            }
+
+            return _paymentMethod;
+        }
+    }
+
+    public IPaymentRepository Payments
+    {
+        get
+        {
+            if (_payment == null)
+            {
+                _payment = new PaymentRepository(_contextdb);
+            }
+
+            return _payment;
         }
     }
 }

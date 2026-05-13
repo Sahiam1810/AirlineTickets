@@ -16,15 +16,20 @@ public sealed class PaymentMethodConfiguration : IEntityTypeConfiguration<Paymen
         builder.Property(pm => pm.CardTypeId).HasColumnName("card_type_id");
         builder.Property(pm => pm.CardIssuerId).HasColumnName("card_issuer_id");
         builder.Property(pm => pm.CommercialName).HasColumnName("commercial_name").HasMaxLength(50).IsRequired();
+        builder.Property(pm => pm.CreatedAt).HasColumnName("created_at").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
+        builder.Property(pm => pm.UpdatedAt).HasColumnName("updated_at").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
         builder.HasIndex(pm => pm.CommercialName).IsUnique();
         builder.HasOne(pm => pm.PaymentMethodType)
-            .WithMany(pmt => pmt.PaymentMethods)
-            .HasForeignKey(pm => pm.PaymentMethodTypeId);
+            .WithMany()
+            .HasForeignKey(pm => pm.PaymentMethodTypeId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(pm => pm.CardType)
-            .WithMany(ct => ct.PaymentMethods)
-            .HasForeignKey(pm => pm.CardTypeId);
+            .WithMany()
+            .HasForeignKey(pm => pm.CardTypeId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(pm => pm.CardIssuer)
-            .WithMany(ci => ci.PaymentMethods)
-            .HasForeignKey(pm => pm.CardIssuerId);
+            .WithMany()
+            .HasForeignKey(pm => pm.CardIssuerId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

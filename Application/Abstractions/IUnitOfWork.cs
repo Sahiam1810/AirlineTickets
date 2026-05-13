@@ -58,6 +58,8 @@ public interface IUnitOfWork
     IPaymentMethodTypeRepository PaymentMethodTypes { get; }
     ICardTypeRepository CardTypes { get; }
     ICardIssuerRepository CardIssuers { get; }
+    IPaymentMethodRepository PaymentMethods { get; }
+    IPaymentRepository Payments { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }

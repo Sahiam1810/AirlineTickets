@@ -4,31 +4,28 @@ using System.Threading.Tasks;
 using Application.Abstractions;
 using Domain.Entities.Payments;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Context;
 
 namespace Application.UseCase.InvoiceItems;
 
 public sealed class CreateInvoiceItemHandler : IRequestHandler<CreateInvoiceItem, int>
 {
     private readonly IUnitOfWork _uow;
-    private readonly AppDbContext _context;
 
-    public CreateInvoiceItemHandler(IUnitOfWork uow, AppDbContext context)
+    public CreateInvoiceItemHandler(IUnitOfWork uow)
     {
         _uow = uow;
-        _context = context;
     }
 
     public async Task<int> Handle(CreateInvoiceItem req, CancellationToken ct)
     {
-        if (!await _context.Invoices.AnyAsync(x => x.Id == req.InvoiceId, ct))
+        if (await _uow.Invoices.GetByIdAsync(req.InvoiceId, ct) is null)
             throw new ArgumentException($"Invoice with id {req.InvoiceId} does not exist.");
 
-        if (!await _context.InvoiceItemTypes.AnyAsync(x => x.Id == req.InvoiceItemTypeId, ct))
+        if (await _uow.InvoiceItemTypes.GetByIdAsync(req.InvoiceItemTypeId, ct) is null)
             throw new ArgumentException($"InvoiceItemType with id {req.InvoiceItemTypeId} does not exist.");
 
-        if (req.ReservationPassengerId.HasValue && !await _context.ReservationPassengers.AnyAsync(x => x.Id == req.ReservationPassengerId.Value, ct))
+        if (req.ReservationPassengerId.HasValue
+            && await _uow.ReservationPassengers.GetByIdAsync(req.ReservationPassengerId.Value, ct) is null)
             throw new ArgumentException($"ReservationPassenger with id {req.ReservationPassengerId.Value} does not exist.");
 
         if (await _uow.InvoiceItems.ExistsAsync(req.InvoiceId, req.Description, ct))

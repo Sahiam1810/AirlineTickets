@@ -52,6 +52,8 @@ using Infrastructure.Repositories.TicketStatuses;
 using Infrastructure.Repositories.Tickets;
 using Infrastructure.Repositories.InvoiceItemTypes;
 using Infrastructure.Repositories.InvoiceItems;
+using Infrastructure.Repositories.PaymentMethods;
+using Infrastructure.Repositories.Payments;
 using Infrastructure.Repositories.PaymentMethodTypes;
 using Infrastructure.Repositories.PaymentStates;
 var builder = WebApplication.CreateBuilder(args);
@@ -120,6 +122,8 @@ builder.Services.AddScoped<IPaymentStateRepository, PaymentStateRepository>();
 builder.Services.AddScoped<IPaymentMethodTypeRepository, PaymentMethodTypeRepository>();
 builder.Services.AddScoped<ICardTypeRepository, CardTypeRepository>();
 builder.Services.AddScoped<ICardIssuerRepository, CardIssuerRepository>();
+builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 var app = builder.Build();
 
