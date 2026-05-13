@@ -20,6 +20,7 @@ using Infrastructure.Repositories.Fares;
 using Infrastructure.Repositories.FlightAssignments;
 using Infrastructure.Repositories.Flights;
 using Infrastructure.Repositories.FlightRoles;
+using Infrastructure.Repositories.FlightSeats;
 using Infrastructure.Repositories.FlightStates;
 using Infrastructure.Repositories.FlightStatusTransitions;
 using Infrastructure.Repositories.People;
@@ -78,6 +79,7 @@ public class EfUnitOfWork : IUnitOfWork
     public IFlightRepository? _flight;
     public IFlightAssignmentRepository? _flightAssignment;
     public ISeatLocationTypeRepository? _seatLocationType;
+    public IFlightSeatRepository? _flightSeat;
 
     public EfUnitOfWork(AppDbContext db)
     {
@@ -568,6 +570,19 @@ public class EfUnitOfWork : IUnitOfWork
             }
 
             return _seatLocationType;
+        }
+    }
+
+    public IFlightSeatRepository FlightSeats
+    {
+        get
+        {
+            if (_flightSeat == null)
+            {
+                _flightSeat = new FlightSeatRepository(_contextdb);
+            }
+
+            return _flightSeat;
         }
     }
 }

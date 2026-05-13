@@ -40,6 +40,7 @@ public interface IUnitOfWork
     IFlightRepository Flights { get; }
     IFlightAssignmentRepository FlightAssignments { get; }
     ISeatLocationTypeRepository SeatLocationTypes { get; }
+    IFlightSeatRepository FlightSeats { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
     Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken ct = default);
 }
